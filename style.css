@@ -1630,7 +1630,7 @@ padding: 0;
 #secondary .widget-title:after{
    content: "";
     display: inline-block;
-    width: 100%;
+    width: 80%;
     height: 2px;
     background:  #CA4E07;
     position: absolute;
@@ -3537,4 +3537,16 @@ opacity: 0.7;
   .admin-bar .container {
     padding-top: 46px;
   }
+}
+
+
+/**
+====================================================================
+ Bootstrap Carousel Indicators
+====================================================================
+*/
+.carousel-indicators li {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50%;
 }

@@ -108,7 +108,7 @@
 					$wk_wow_child_button_slug_link = get_permalink(get_page_by_path($wk_wow_child_button_slug));
 				}
 				if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-					<a href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
+					<a id="topbar-button" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
 				<?php } ?>
 
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="" href="#pageContainerMainNavMobile" aria-expanded="false" 
@@ -133,7 +133,7 @@
 
 				<?php
 				if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-					<a href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-block d-none"><?php echo esc_html($wk_wow_child_button); ?></a>
+					<a id="topbar-button" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-block d-none"><?php echo esc_html($wk_wow_child_button); ?></a>
 				<?php } ?>
 
             </nav>
@@ -141,23 +141,23 @@
         </div>
     </header><!-- #masthead -->
     <?php if(is_front_page() && !get_theme_mod( 'header_banner_visibility' )): ?>
-        <div id="page-sub-header" class="page-sub-header jarallax animate-cover-image" <?php if(has_header_image()) { ?>style="background-image: url('<?php header_image(); ?>');" <?php } ?>>
+        <div id="page-sub-header" class="page-sub-header jarallax" <?php if(has_header_image()) { ?>style="background-image: url('<?php header_image(); ?>');" <?php } ?>>
             <div class="container">
-                <p class="display-1">
+                <p id="header-banner-title" class="display-1">
                     <?php
                     if(get_theme_mod( 'header_banner_title_setting' )){
                         echo esc_html(get_theme_mod( 'header_banner_title_setting' ));
                     }
                     ?>
                 </p>
-                <p>
+                <p id="header-banner-tagline">
                     <?php
                     if(get_theme_mod( 'header_banner_tagline_setting' )){
                         echo esc_html(get_theme_mod( 'header_banner_tagline_setting' ));
                   }
                     ?>
                 </p>
-                <a href="#content" class="page-scroller btn-circle"><i class="fa fa-fw fa-arrow-down "></i></a>
+                <a href="#content" class="page-scroller btn-circle"><i class="fa fa-fw fa-arrow-down"></i></a>
             </div>
         </div>
     <?php endif; ?>
