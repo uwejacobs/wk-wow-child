@@ -1,7 +1,11 @@
 jQuery(document).ready(function($){
     'use strict';
 
-console.log(WKWC_options);
+//console.log(WKWC_options);
+	// MailPoet
+	$(".mailpoet_form_columns").addClass("form-inline");
+	$(".mailpoet_form_columns input").addClass("form-control");
+	$("input.mailpoet_submit").addClass("btn btn-success");
 
 	// Cover Image Animarion
 	if (WKWC_options.coverImageAni && WKWC_options.coverImageAni !== "none") {

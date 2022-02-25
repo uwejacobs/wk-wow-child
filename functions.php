@@ -43,6 +43,10 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_css')):
 		wp_dequeue_style('wk-wow-bootstrap-css');
 		wp_deregister_style('wk-wow-bootstrap-css');
 		remove_action('wp_head', 'wk_wow_customizer_css');
+		if (get_theme_mod('theme_option_setting') && get_theme_mod('theme_option_setting') !== 'default') {
+			wp_dequeue_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
+			wp_deregister_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
+		}
 	}
 endif;
 add_action('wp_print_styles', 'wkwc_chld_thm_dequeue_parent_css', 11);
@@ -740,9 +744,9 @@ add_action('customize_register', 'wkwc_customize_register_child', 99);
 
 function wk_wow_child_widgets_init() {
     register_sidebar( array(
-        'name'          => esc_html__( 'Footer 4', 'wk-wow' ),
+        'name'          => esc_html__( 'Footer 4', 'wk-wow-child' ),
         'id'            => 'footer-4',
-        'description'   => esc_html__( 'Add widgets here.', 'wk-wow' ),
+        'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h3 class="widget-title">',
@@ -750,9 +754,9 @@ function wk_wow_child_widgets_init() {
     ) );
 
     register_sidebar( array(
-        'name'          => esc_html__( 'Footer 5', 'wk-wow' ),
+        'name'          => esc_html__( 'Footer 5', 'wk-wow-child' ),
         'id'            => 'footer-5',
-        'description'   => esc_html__( 'Add widgets here.', 'wk-wow' ),
+        'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h3 class="widget-title">',
@@ -760,9 +764,9 @@ function wk_wow_child_widgets_init() {
     ) );
 
     register_sidebar( array(
-        'name'          => esc_html__( 'Footer 6', 'wk-wow' ),
+        'name'          => esc_html__( 'Footer 6', 'wk-wow-child' ),
         'id'            => 'footer-6',
-        'description'   => esc_html__( 'Add widgets here.', 'wk-wow' ),
+        'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h3 class="widget-title">',
@@ -770,9 +774,9 @@ function wk_wow_child_widgets_init() {
     ) );
 
     register_sidebar( array(
-        'name'          => esc_html__( 'Footer 7', 'wk-wow' ),
+        'name'          => esc_html__( 'Footer 7', 'wk-wow-child' ),
         'id'            => 'footer-7',
-        'description'   => esc_html__( 'Add widgets here.', 'wk-wow' ),
+        'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
         'before_widget' => '<section id="%1$s" class="widget %2$s">',
         'after_widget'  => '</section>',
         'before_title'  => '<h3 class="widget-title">',
@@ -826,6 +830,7 @@ function wkwc_customizer_css()
 }
 
 .btn-circle,
+.mailpoet_form,
 .widget_tag_cloud .tagcloud a,
 .single-service:hover i.fa,
 .single-service:hover i.fab  {
