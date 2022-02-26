@@ -28,8 +28,13 @@
 
 							<?php
 							$copyright_text = get_theme_mod( 'copyright_text_setting', __('Uwe Jacobs - All Rights Reserved.', 'wk-wow-child' ) );
-							echo wp_kses_post( $copyright_text );
-							?>
+							echo wp_kses_post( $copyright_text ); ?>
+
+							<div class="">
+							    <a href="<?php echo esc_url( __( 'https://web-komp.eu/theme/wow/', 'wk-wow-child' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php _e( 'Theme Wow by WebKomp', 'wk-wow-child' ); ?></a>
+								<span class="sep"> | </span> 
+							    <a href="<?php echo esc_url( __( 'https://ujsoftware.com', 'wk-wow-child' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php _e( 'Design and Marketing by UJ Software', 'wk-wow-child' ); ?></a>
+							</div>
             </div><!-- close .site-info -->
 		</div>
 	</footer><!-- #colophon -->

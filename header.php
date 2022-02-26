@@ -103,7 +103,7 @@
 				$wk_wow_child_button     = get_theme_mod( 'topbar_button_text_setting', '' );
 				$wk_wow_child_button_slug = get_theme_mod( 'topbar_button_slug_setting', '' );
 				if (substr($wk_wow_child_button_slug, 0, 1) === '#') {
-					$wk_wow_child_button_slug_link = site_url() . $wk_wow_child_button_slug;
+					$wk_wow_child_button_slug_link = (is_front_page() ? '' : site_url()) . $wk_wow_child_button_slug;
 				} else {
 					$wk_wow_child_button_slug_link = get_permalink(get_page_by_path($wk_wow_child_button_slug));
 				}
@@ -157,7 +157,7 @@
                   }
                     ?>
                 </p>
-                <a href="#content" class="page-scroller btn-circle" aria-hidden="true"><i class="fa fa-fw fa-arrow-down"></i></a>
+                <a href="#content" class="page-scroller btn-circle"><i class="fa fa-fw fa-arrow-down"></i><span class="sr-only"><?php esc_html_e( 'Skip to content', 'wk-wow-child' ); ?></span></a>
             </div>
         </div>
     <?php endif; ?>
