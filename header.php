@@ -73,7 +73,7 @@
             <nav id="pageContainerMainNavMobile" class="navbar navbar-expand-xl p-0 ">
                 <div class="navbar-brand">
                 <div class="row">
-                <div class="col">
+                <div class="col custom-logo-col">
            <?php
 	the_custom_logo();
 ?>

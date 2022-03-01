@@ -41,7 +41,7 @@
 <?php endif; ?>
 </div><!-- #page -->
 
-<a href="#" class=" btn-light btn-lg topbutton" role="button"><i class="fas fa-chevron-up"></i><span class="sr-only">Go to top</span></a>
+<a href="#" class="btn-light btn-lg topbutton" role="button" title="Go to top"><i class="fas fa-chevron-up"></i><span class="sr-only">Go to top</span></a>
 
 <?php wp_footer(); ?>
 </body>
