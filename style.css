@@ -6,7 +6,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, responsive, animated
-Version: 1.0.7
+Version: 1.0.8
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.0
@@ -2640,3 +2640,11 @@ Text Domain: wk-wow-child
  .custom-logo-col {display: inline-block; max-width: 100px; max-height: 100px;}
 
  .custom-logo-col img {max-width: 100%; height:auto;}
+
+ .calendar-inquiry { background-color: grey }
+ .calendar-tentative { background-color: lightsalmon }
+ .calendar-booked { background-color: tomato }
+ .calendar-event { background-color: SlateBlue }
+ .calendar-holiday { background-color: DodgerBlue }
+ .calendar-special { background-color: yellow }
+ .calendar-legend { padding:5px; margin-right:20px; }

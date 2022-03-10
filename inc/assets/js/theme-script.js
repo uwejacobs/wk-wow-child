@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
 
     $(function($) {
       var offset = $('#masthead').height() + ($('#wpadminbar').height() ?? 0) + 20;
-      $('a[href*=#]:not([href=#])').click(function() {
+      $('a[href*=#]:not([href=#,.carousel-control-prev,.carousel-control-next])').click(function() {
 		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
     
           var target = $(this.hash);

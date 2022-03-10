@@ -111,7 +111,7 @@
 					<a id="topbar-button-left" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
 				<?php } ?>
 
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="" aria-expanded="false" 
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
                  aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
                     <span class="my-1 mx-2 close">X</span>
                     <span class="navbar-toggler-icon"></span>

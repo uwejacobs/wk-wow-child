@@ -1,0 +1,356 @@
+# Copyright (C) 2022 Uwe Jacobs
+# This file is distributed under the .
+msgid ""
+msgstr ""
+"Project-Id-Version: WK Wow Child 1.0.7\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wk-wow-child\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-03-10T09:49:33-05:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: wk-wow-child\n"
+
+#. Theme Name of the theme
+msgid "WK Wow Child"
+msgstr ""
+
+#. Theme URI of the theme
+msgid "https://web-komp.eu/theme/wow"
+msgstr ""
+
+#. Description of the theme
+msgid "WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7."
+msgstr ""
+
+#. Author of the theme
+msgid "Uwe Jacobs"
+msgstr ""
+
+#. translators: Copyright date format, see https://www.php.net/date
+#: footer.php:24
+msgctxt "copyright date format"
+msgid "Y"
+msgstr ""
+
+#: footer.php:30
+msgid "Uwe Jacobs - All Rights Reserved."
+msgstr ""
+
+#: footer.php:34
+msgid "https://web-komp.eu/theme/wow/"
+msgstr ""
+
+#: footer.php:34
+msgid "Theme Wow by WebKomp"
+msgstr ""
+
+#: footer.php:36
+msgid "https://ujsoftware.com"
+msgstr ""
+
+#: footer.php:36
+msgid "Design and Marketing by UJ Software"
+msgstr ""
+
+#: functions.php:82
+msgid "API"
+msgstr ""
+
+#: functions.php:93
+msgid "Google reCAPTCHA key v2"
+msgstr ""
+
+#: functions.php:94
+msgid "Google reCAPTCHA key (v2 invisible)."
+msgstr ""
+
+#: functions.php:106
+msgid "Google reCAPTCHA key v3"
+msgstr ""
+
+#: functions.php:107
+msgid "Google reCAPTCHA key (v3 invisible)."
+msgstr ""
+
+#: functions.php:119
+msgid "Google Maps API key"
+msgstr ""
+
+#: functions.php:131
+msgid "Facebook Meta Pixel Code"
+msgstr ""
+
+#: functions.php:143
+msgid "Google Search Console validation code"
+msgstr ""
+
+#: functions.php:155
+msgid "Microsoft Bing Webmaster validation code"
+msgstr ""
+
+#: functions.php:167
+msgid "Geo Meta Tags"
+msgstr ""
+
+#: functions.php:168
+msgid "Generate with the <a href=\"https://www.geo-tag.de/generator/en.html\" target=\"_blank\">HTML Geo-Tag Generator</a>."
+msgstr ""
+
+#: functions.php:176
+msgid "no"
+msgstr ""
+
+#: functions.php:182
+msgid "Load FontAwesome"
+msgstr ""
+
+#: functions.php:183
+msgid "Load FontAwesome CSS and Fonts. Turn off when using the FontAwesome plugin."
+msgstr ""
+
+#: functions.php:188
+msgid "Yes"
+msgstr ""
+
+#: functions.php:189
+msgid "No"
+msgstr ""
+
+#: functions.php:202
+msgid "Copyright"
+msgstr ""
+
+#: functions.php:203
+msgid "Copyright Text to show after the Year in Footer."
+msgstr ""
+
+#: functions.php:214
+msgid "Contact Us"
+msgstr ""
+
+#: functions.php:223
+msgid "Topbar Button Text:"
+msgstr ""
+
+#: functions.php:234
+msgid "contact-us"
+msgstr ""
+
+#: functions.php:243
+msgid "Topbar Button Slug:"
+msgstr ""
+
+#: functions.php:254
+msgid "Site Owner Info"
+msgstr ""
+
+#: functions.php:266
+msgid "Company name"
+msgstr ""
+
+#: functions.php:280
+msgid "Email address"
+msgstr ""
+
+#: functions.php:294
+msgid "Phone number"
+msgstr ""
+
+#: functions.php:295
+#: functions.php:367
+#: functions.php:410
+#: functions.php:453
+msgid "Format the phone number for readability."
+msgstr ""
+
+#: functions.php:309
+msgid "Location address"
+msgstr ""
+
+#: functions.php:323
+msgid "Mailing address"
+msgstr ""
+
+#: functions.php:324
+msgid "If different from location address."
+msgstr ""
+
+#: functions.php:338
+msgid "Contact 1 name"
+msgstr ""
+
+#: functions.php:352
+msgid "Contact 1 email address"
+msgstr ""
+
+#: functions.php:366
+msgid "Contact 1 phone number"
+msgstr ""
+
+#: functions.php:381
+msgid "Contact 2 name"
+msgstr ""
+
+#: functions.php:395
+msgid "Contact 2 email address"
+msgstr ""
+
+#: functions.php:409
+msgid "Contact 2 phone number"
+msgstr ""
+
+#: functions.php:424
+msgid "Contact 3 name"
+msgstr ""
+
+#: functions.php:438
+msgid "Contact 3 email address"
+msgstr ""
+
+#: functions.php:452
+msgid "Contact 3 phone number"
+msgstr ""
+
+#: functions.php:464
+msgid "Social accounts"
+msgstr ""
+
+#: functions.php:476
+msgid "Google My Business URL"
+msgstr ""
+
+#: functions.php:490
+msgid "Microsoft Bing Places for Business URL"
+msgstr ""
+
+#: functions.php:504
+msgid "Yelp URL"
+msgstr ""
+
+#: functions.php:518
+msgid "Facebook URL"
+msgstr ""
+
+#: functions.php:532
+msgid "Instagram URL"
+msgstr ""
+
+#: functions.php:546
+msgid "Youtube URL"
+msgstr ""
+
+#: functions.php:560
+msgid "Twitter URL"
+msgstr ""
+
+#: functions.php:574
+msgid "LinkedIn URL"
+msgstr ""
+
+#: functions.php:588
+msgid "nextdoor URL"
+msgstr ""
+
+#: functions.php:603
+msgid "Theme Option"
+msgstr ""
+
+#: functions.php:604
+msgid "Don't forget to empty all settings in the Colors section if you choose a theme option other than Default."
+msgstr ""
+
+#: functions.php:650
+msgid "Animations"
+msgstr ""
+
+#: functions.php:695
+msgid "Cover image"
+msgstr ""
+
+#: functions.php:696
+msgid "The Ken Burns animations work best."
+msgstr ""
+
+#: functions.php:710
+msgid "Header (h1-h6)"
+msgstr ""
+
+#: functions.php:711
+msgid "The Tracking and Focus animations work best."
+msgstr ""
+
+#: functions.php:725
+msgid "Button Hover"
+msgstr ""
+
+#: functions.php:726
+msgid "The Shake animations work best."
+msgstr ""
+
+#: functions.php:740
+msgid "WP Photo Seller Gallery Image"
+msgstr ""
+
+#: functions.php:741
+msgid "The Flip, Scale, Slide, Slit and Swing animations work best."
+msgstr ""
+
+#: functions.php:748
+msgid "Most Theme Options, other than Default, will overwrite the Typography."
+msgstr ""
+
+#: functions.php:749
+msgid "These colors will overwrite the Theme Option under Preset Styles. Leave empty when using a preset style other than Default."
+msgstr ""
+
+#: functions.php:750
+msgid "Color for site title and description in header when Main Color is empty. Will be ignored if same as default text color."
+msgstr ""
+
+#: functions.php:751
+msgid "Color for header background when Header Image is not selected."
+msgstr ""
+
+#: functions.php:752
+msgid "Background color for body, except footer and copyright."
+msgstr ""
+
+#: functions.php:753
+msgid "Color for main elements."
+msgstr ""
+
+#: functions.php:762
+msgid "Footer 4"
+msgstr ""
+
+#: functions.php:764
+#: functions.php:774
+#: functions.php:784
+#: functions.php:794
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:772
+msgid "Footer 5"
+msgstr ""
+
+#: functions.php:782
+msgid "Footer 6"
+msgstr ""
+
+#: functions.php:792
+msgid "Footer 7"
+msgstr ""
+
+#: header.php:69
+#: header.php:160
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:115
+msgid "Toggle navigation"
+msgstr ""
