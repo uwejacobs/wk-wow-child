@@ -2641,6 +2641,7 @@ Text Domain: wk-wow-child
 
  .custom-logo-col img {max-width: 100%; height:auto;}
 
+ .calendar-legend { font-size: 12px }
  .calendar-inquiry { background-color: grey }
  .calendar-tentative { background-color: lightsalmon }
  .calendar-booked { background-color: tomato }
