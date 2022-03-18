@@ -160,7 +160,6 @@ Text Domain: wk-wow-child
 	 margin-bottom: 1.5em;
 }
  h1.entry-title {
-	 font-size: 1.31rem;
 	 border-bottom: 1px solid #eaecef;
 }
  h2.entry-title {
@@ -925,10 +924,6 @@ Text Domain: wk-wow-child
 	 color: #fff!important;
 	 background-color: #fff!important;
 }
- h1.entry-title {
-	 font-size: 2rem;
-	 border-bottom: 0 !important;
-}
  #masthead.site-header .navbar-nav > li.menu-item > a {
 	 font-weight: 500;
 }
@@ -1529,6 +1524,9 @@ Text Domain: wk-wow-child
 	 width: 100% !important;
 	 padding-right: 30px;
 	 padding-left: 10px;
+}
+.wpcf7 textarea {
+    height: 8em;
 }
 /** ==================================================================== Shop Page ==================================================================== */
 /* Flexbox on WooCommerce archive products */
