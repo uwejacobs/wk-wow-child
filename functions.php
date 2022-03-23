@@ -14,8 +14,15 @@ if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
 
 if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     function wkwc_chld_thm_cfg_css_js() {
-	wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
-	wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js', array('jquery'));
+	$wk_wow_bootstrap_version = get_theme_mod('bootstrap_version_setting');
+	if (empty($wk_wow_bootstrap_version) || $wk_wow_bootstrap_version === '4') {
+		wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap4.min.css');
+		wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap4.bundle.min.js', array('jquery'));
+	} else if ($wk_wow_bootstrap_version === '5') {
+		wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap5.min.css');
+		wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
+		wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap5.bundle.min.js');
+	}
 
 	// force child theme style.css after bootstrap reload
 	wp_dequeue_style('wk-wow-style');
@@ -83,30 +90,52 @@ if (!function_exists('wkwc_customize_register_child')) {
 				'priority' => 70,
 				'capability' => 'edit_theme_options',
 		));
-		$wp_customize->add_setting('recaptcha_key_v2_setting', array(
+		$wp_customize->add_setting('recaptcha_site_key_v2_setting', array(
 			'default'   => '',
 			'type'       => 'theme_mod',
 			'capability' => 'edit_theme_options',
 			'sanitize_callback' => 'wp_filter_nohtml_kses',
 		));
-		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_key_v2', array(
-			'label' => __('Google reCAPTCHA key v2', 'wk-wow-child'),
-			'description' => __('Google reCAPTCHA key (v2 invisible).', 'wk-wow-child'),
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_site_key_v2', array(
+			'label' => __('Google reCAPTCHA site key v2', 'wk-wow-child'),
 			'section'    => 'api_keys',
-			'settings'   => 'recaptcha_key_v2_setting',
+			'settings'   => 'recaptcha_site_key_v2_setting',
 			'type' => 'text'
 		)));
-		$wp_customize->add_setting('recaptcha_key_v3_setting', array(
+		$wp_customize->add_setting('recaptcha_secret_key_v2_setting', array(
 			'default'   => '',
 			'type'       => 'theme_mod',
 			'capability' => 'edit_theme_options',
 			'sanitize_callback' => 'wp_filter_nohtml_kses',
 		));
-		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_key_v3', array(
-			'label' => __('Google reCAPTCHA key v3', 'wk-wow-child'),
-			'description' => __('Google reCAPTCHA key (v3 invisible).', 'wk-wow-child'),
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_secret_key_v2', array(
+			'label' => __('Google reCAPTCHA secret key v2', 'wk-wow-child'),
 			'section'    => 'api_keys',
-			'settings'   => 'recaptcha_key_v3_setting',
+			'settings'   => 'recaptcha_secret_key_v2_setting',
+			'type' => 'text'
+		)));
+		$wp_customize->add_setting('recaptcha_site_key_v3_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_site_key_v3', array(
+			'label' => __('Google reCAPTCHA site key v3', 'wk-wow-child'),
+			'section'    => 'api_keys',
+			'settings'   => 'recaptcha_site_key_v3_setting',
+			'type' => 'text'
+		)));
+		$wp_customize->add_setting('recaptcha_secret_key_v3_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'recaptcha_secret_key_v3', array(
+			'label' => __('Google reCAPTCHA secret key v3', 'wk-wow-child'),
+			'section'    => 'api_keys',
+			'settings'   => 'recaptcha_secret_key_v3_setting',
 			'type' => 'text'
 		)));
 		$wp_customize->add_setting('google_maps_key_setting', array(
@@ -170,6 +199,26 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'settings'   => 'geo_tag_meta_setting',
 			'type' => 'textarea',
 		)));
+
+		/*Bootstrap Version*/
+		$wp_customize->add_setting('bootstrap_version_setting', array(
+			'default' => __('4','wk-wow-child'),
+			'sanitize_callback' => 'sanitize_text_field',
+		));
+		$wp_customize->add_control(
+			'bootstrap_version',
+			array(
+				'label' => __('Bootstrap Version', 'wk-wow-child'),
+				'description' => __('The Bootstrap Version (default: 4).', 'wk-wow-child'),
+				'section' => 'site_name_text_color',
+				'settings' => 'bootstrap_version_setting',
+					'type'    => 'select',
+					'choices' => array(
+						'4' => __('Version 4', 'wk-wow-child'),
+						'5' => __('Version 5', 'wk-wow-child'),
+					),
+			'priority' => 20,
+		));
 
 		/*FontAwesome*/
 		$wp_customize->add_setting('load_fontawesome_setting', array(
@@ -745,9 +794,10 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'choices' => $wkwc_animations
 		) ) );
 
-		$wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, will overwrite the Typography.', 'wk-wow-child');
-		$wp_customize->get_section('main_color_section')->description = __('These colors will overwrite the Theme Option under Preset Styles. Leave empty when using a preset style other than Default.', 'wk-wow-child');
-		$wp_customize->get_control('header_textcolor')->description = __('Color for site title and description in header when Main Color is empty. Will be ignored if same as default text color.', 'wk-wow-child');
+		$wp_customize->remove_control('cdn_assets');
+		$wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
+		$wp_customize->get_section('main_color_section')->description = __('These colors overwrite the Theme Option under Preset Styles. Leave empty when using a preset style other than Default.', 'wk-wow-child');
+		$wp_customize->get_control('header_textcolor')->description = __('Color for site title and description in header when Main Color is empty. Ignored if same as default text color.', 'wk-wow-child');
 		$wp_customize->get_control('header_bg_color')->description = __('Color for header background when Header Image is not selected.', 'wk-wow-child');
 		$wp_customize->get_control('background_color')->description = __('Background color for body, except footer and copyright.', 'wk-wow-child');
 		$wp_customize->get_control('main_color')->description = __('Color for main elements.', 'wk-wow-child');
@@ -870,7 +920,7 @@ if (!function_exists('wkwc_customizer_css')) {
 	   border-top-color: <?php echo esc_html($main_color);?>;
 	}
 
-	h1,h2,h3,h4,h5,h6,.display-1,.display-2,.display-3,.display-4,
+	h1,h2,h3,h4,h5,h6,.display-1,.display-2,.display-3,.display-4, display-5, display-6,
 	a,
 	a:hover,
 	a:focus,
