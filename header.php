@@ -68,7 +68,7 @@
 <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wk-wow-child' ); ?></a>
     <?php if(!is_page_template( 'blank-page.php' ) && !is_page_template( 'blank-page-with-container.php' )): ?>
-    <header id="masthead" class="site-header <?php echo wk_wow_bg_class(); ?>" role="banner">
+    <header id="masthead" class="site-header <?php echo wk_wow_child_bg_class(); ?>" role="banner">
         <div class="container-fluid">
             <nav id="pageContainerMainNavMobile" class="navbar navbar-expand-xl p-0 ">
                 <div class="navbar-brand">
@@ -113,7 +113,7 @@
 
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
                  aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
-                    <span class="my-1 mx-2 btn-close close">X</span>
+                    <span class="my-1 mx-2 close close">X</span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
 

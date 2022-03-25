@@ -646,15 +646,19 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'type'    => 'select',
 			'choices' => array(
 			'default' => 'Default',
+			'agency' => 'Agency',
 			'blue_voltage' => 'Blue Voltage',
 			'boldstrap' => 'Boldstrap',
 			'cerulean' => 'Cerulean',
 			'cosmo' => 'Cosmo',
+			'creative' => 'Creative',
 			'cyborg' => 'Cyborg',
 			'darkly' => 'Darkly',
 			'darkster' => 'Darkster',
 			'flatly' => 'Flatly',
+			'freelancer' => 'Freelancer',
 			'greyson' => 'Greyson',
+			'grayscale' => 'Grayscale',
 			'herbie' => 'Herbie',
 			'hootstrap' => 'Hootstrap',
 			'journal' => 'Journal',
@@ -786,7 +790,7 @@ if (!function_exists('wkwc_customize_register_child')) {
 
 		$wp_customize->remove_control('cdn_assets');
 		$wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
-		$wp_customize->get_section('main_color_section')->description = __('These colors overwrite the Theme Option under Preset Styles. Leave empty when using a preset style other than Default.', 'wk-wow-child');
+		$wp_customize->get_section('main_color_section')->description = __('These colors only affect the Default Preset Style.', 'wk-wow-child');
 		$wp_customize->get_control('header_textcolor')->description = __('Color for site title and description in header when Main Color is empty. Ignored if same as default text color.', 'wk-wow-child');
 		$wp_customize->get_control('header_bg_color')->description = __('Color for header background when Header Image is not selected.', 'wk-wow-child');
 		$wp_customize->get_control('background_color')->description = __('Background color for body, except footer and copyright.', 'wk-wow-child');
@@ -938,7 +942,9 @@ if (!function_exists('wkwc_customizer_css')) {
 	<?php
 	}
 
-	add_action( 'wp_head', 'wkwc_customizer_css', 11);
+	if (get_theme_mod( 'theme_option_setting') && get_theme_mod('theme_option_setting') === 'default') {
+		add_action( 'wp_head', 'wkwc_customizer_css', 11);
+	}
 }
 
 if (!function_exists('wkwc_sanitize_meta_tag')) {
@@ -1000,4 +1006,79 @@ if (!function_exists('ujcf_save_post_bookings_callback')) {
 			postexpirator_schedule_event($post_id,$ts,$opts);
 		}
 	}
+}
+
+if (!function_exists('wk_wow_child_bg_class')) {
+function wk_wow_child_bg_class() {
+    switch (get_theme_mod( 'theme_option_setting' )) {
+        case "cerulean":
+            return 'navbar-dark bg-primary';
+            break;
+        case "cosmo":
+            return 'navbar-dark bg-primary';
+            break;
+        case "cyborg":
+            return 'navbar-dark bg-dark';
+            break;
+        case "darkly":
+            return 'navbar-dark bg-primary';
+            break;
+        case "flatly":
+            return 'navbar-dark bg-primary';
+            break;
+        case "freelancer":
+            return 'navbar-dark bg-primary';
+            break;
+        case "journal":
+            return 'navbar-light bg-light';
+            break;
+        case "litera":
+            return 'navbar-light bg-light';
+            break;
+        case "lumen":
+            return 'navbar-light bg-light';
+            break;
+        case "lux":
+            return 'navbar-light bg-light';
+            break;
+        case "materia":
+            return 'navbar-dark bg-primary';
+            break;
+        case "minty":
+            return 'navbar-dark bg-primary';
+            break;
+        case "pulse":
+            return 'navbar-dark bg-primary';
+            break;
+        case "sandstone":
+            return 'navbar-dark bg-primary';
+            break;
+        case "simplex":
+            return 'navbar-light bg-light';
+            break;
+        case "sketchy":
+            return 'navbar-light bg-light';
+            break;
+        case "slate":
+            return 'navbar-dark bg-primary';
+            break;
+        case "solar":
+            return 'navbar-dark bg-dark';
+            break;
+        case "spacelab":
+            return 'navbar-light bg-light';
+            break;
+        case "superhero":
+            return 'navbar-dark bg-dark';
+            break;
+        case "united":
+            return 'navbar-dark bg-primary';
+            break;
+        case "yeti":
+            return 'navbar-dark bg-primary';
+            break;
+        default:
+            return 'navbar-light';
+    }
+}
 }

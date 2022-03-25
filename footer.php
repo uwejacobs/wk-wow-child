@@ -15,7 +15,7 @@
 		</div><!-- .container -->
 	</div><!-- #content -->
     <?php get_template_part( 'footer-widget' ); ?>
-	<footer id="colophon" class="site-footer <?php echo wk_wow_bg_class(); ?>" role="contentinfo">
+	<footer id="colophon" class="site-footer <?php echo wk_wow_child_bg_class(); ?>" role="contentinfo">
 		<div class="container pt-3 pb-3">
             <div class="site-info">
                 Copyright &copy; <?php
