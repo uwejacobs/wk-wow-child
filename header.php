@@ -111,26 +111,25 @@
 					<a id="topbar-button-left" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
 				<?php } ?>
 
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
                  aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
-                    <span class="my-1 mx-2 close">X</span>
+                    <span class="my-1 mx-2 btn-close close">X</span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+		<div class="collapse navbar-collapse" id="main-nav">
                 <?php
                 wp_nav_menu(array(
-                'theme_location'  => 'primary',
-                'container'       => 'div',
-                'container_id'    => 'main-nav',
-                'container_class' => 'collapse navbar-collapse justify-content-end',
-                'menu_id'         => false,
-                'menu_class'      => 'navbar-nav',
-                'depth'           => 2,
-                'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
-                'walker'          => new wp_bootstrap_navwalker()
+			'theme_location'  => 'primary',
+			'container' => false,
+			'menu_class' => '',
+			'fallback_cb' => '__return_false',
+			'items_wrap' => '<ul id="%1$s" class="navbar-nav ms-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+			'depth' => 2,
+			'walker' => new bootstrap_5_wp_nav_menu_walker()
                 ));
                 ?>
-
+		</div>
 				<?php
 				if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
 					<a id="topbar-button-right" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-block d-none"><?php echo esc_html($wk_wow_child_button); ?></a>

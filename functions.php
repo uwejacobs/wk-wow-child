@@ -2,6 +2,8 @@
 // Exit if accessed directly
 if (!defined('ABSPATH')) exit;
 
+require_once dirname( __FILE__ ) . '/inc/wp_bootstrap_navwalker.php';
+
 if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
     function wkwc_chld_thm_cfg_locale_css($uri){
         if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
@@ -14,15 +16,9 @@ if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
 
 if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     function wkwc_chld_thm_cfg_css_js() {
-	$wk_wow_bootstrap_version = get_theme_mod('bootstrap_version_setting');
-	if (empty($wk_wow_bootstrap_version) || $wk_wow_bootstrap_version === '4') {
-		wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap4.min.css');
-		wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap4.bundle.min.js', array('jquery'));
-	} else if ($wk_wow_bootstrap_version === '5') {
-		wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap5.min.css');
-		wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
-		wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap5.bundle.min.js');
-	}
+	wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
+	wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
+	wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
 
 	// force child theme style.css after bootstrap reload
 	wp_dequeue_style('wk-wow-style');
@@ -78,6 +74,20 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_js')) {
 	}
 
 	add_action('wp_print_scripts', 'wkwc_chld_thm_dequeue_parent_js', 11);
+}
+
+if (!function_exists('wk_wow_child_password_form')) {
+	remove_filter( 'the_password_form', 'wk_wow_password_form' );
+	function wk_wow_child_password_form() {
+		global $post;
+		$label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
+		$o = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post">
+		<div class="d-block mb-3">' . __( "To view this protected post, enter the password below:", 'wk-wow-child' ) . '</div>
+		<div class="input-group"><input name="post_password" id="' . $label . '" type="password" size="20" maxlength="20" class="form-control me-2" /> <input type="submit" name="Submit" value="' . esc_attr__( "Submit", 'wk-wow-child' ) . '" class="input-group-text btn btn-primary" /></div>
+		</form>';
+		return $o;
+	}
+	add_filter( 'the_password_form', 'wk_wow_child_password_form', 11 );
 }
 
 if (!function_exists('wkwc_customize_register_child')) {
@@ -199,26 +209,6 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'settings'   => 'geo_tag_meta_setting',
 			'type' => 'textarea',
 		)));
-
-		/*Bootstrap Version*/
-		$wp_customize->add_setting('bootstrap_version_setting', array(
-			'default' => __('4','wk-wow-child'),
-			'sanitize_callback' => 'sanitize_text_field',
-		));
-		$wp_customize->add_control(
-			'bootstrap_version',
-			array(
-				'label' => __('Bootstrap Version', 'wk-wow-child'),
-				'description' => __('The Bootstrap Version (default: 4).', 'wk-wow-child'),
-				'section' => 'site_name_text_color',
-				'settings' => 'bootstrap_version_setting',
-					'type'    => 'select',
-					'choices' => array(
-						'4' => __('Version 4', 'wk-wow-child'),
-						'5' => __('Version 5', 'wk-wow-child'),
-					),
-			'priority' => 20,
-		));
 
 		/*FontAwesome*/
 		$wp_customize->add_setting('load_fontawesome_setting', array(
