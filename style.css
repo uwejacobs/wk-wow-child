@@ -320,13 +320,13 @@ Text Domain: wk-wow-child
  .navbar-toggle .icon-bar {
 	 background: #000 none repeat scroll 0 0;
 }
- .navbar-toggler>.close {
+ .navbar-toggler>.btn-close {
 	 display: inline;
 }
- body:not(.theme-preset-active) .navbar-toggler>.close {
+ body:not(.theme-preset-active) .navbar-toggler>.btn-close {
 	 color: #000;
 }
- .navbar-toggler.collapsed>.close, .navbar-toggler:not(.collapsed)>.navbar-toggler-icon {
+ .navbar-toggler.collapsed>.btn-close, .navbar-toggler:not(.collapsed)>.navbar-toggler-icon {
 	 display: none;
 }
  .dropdown-menu .dropdown-toggle::after {

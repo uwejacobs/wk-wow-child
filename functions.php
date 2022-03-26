@@ -647,42 +647,34 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'choices' => array(
 			'default' => 'Default',
 			'agency' => 'Agency',
-			'blue_voltage' => 'Blue Voltage',
-			'boldstrap' => 'Boldstrap',
 			'cerulean' => 'Cerulean',
 			'cosmo' => 'Cosmo',
 			'creative' => 'Creative',
 			'cyborg' => 'Cyborg',
 			'darkly' => 'Darkly',
-			'darkster' => 'Darkster',
 			'flatly' => 'Flatly',
 			'freelancer' => 'Freelancer',
-			'greyson' => 'Greyson',
 			'grayscale' => 'Grayscale',
-			'herbie' => 'Herbie',
-			'hootstrap' => 'Hootstrap',
 			'journal' => 'Journal',
 			'litera' => 'Litera',
-			'lovey' => 'Lovey',
 			'lumen' => 'Lumen',
 			'lux' => 'Lux',
 			'materia' => 'Materia',
 			'minty' => 'Minty',
-			'monotony' => 'Monotony',
-			'poypull' => 'Poypull',
+			'morph' => 'Morph',
 			'pulse' => 'Pulse',
-			'purple' => 'Purple',
 			'sandstone' => 'Sandstone',
-			'signal' => 'Signal',
 			'simplex' => 'Simplex',
+			'simply' => 'Simply',
 			'sketchy' => 'Sketchy',
 			'slate' => 'Slate',
 			'solar' => 'Solar',
 			'spacelab' => 'Spacelab',
 			'superhero' => 'Superhero',
-			'tequila' => 'Tequila',
 			'united' => 'United',
+			'vapor' => 'Vapor',
 			'yeti' => 'Yeti',
+			'zephyr' => 'Zephyr',
 			)
 		) ) );
 
@@ -1078,7 +1070,7 @@ function wk_wow_child_bg_class() {
             return 'navbar-dark bg-primary';
             break;
         default:
-            return 'navbar-light';
+            return 'navbar-light bg-light';
     }
 }
 }

@@ -112,8 +112,9 @@
 				<?php } ?>
 
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
-                 aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
-                    <span class="my-1 mx-2 close close">X</span>
+		 aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
+		<?php $white_close_button = str_contains(wk_wow_child_bg_class(), "navbar-dark"); ?>
+		    <span class="btn-close<?php echo $white_close_button ? " btn-close-white" : "" ?>"></span>
                     <span class="navbar-toggler-icon"></span>
                 </button>
 

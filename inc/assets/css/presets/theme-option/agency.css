@@ -11520,7 +11520,7 @@ header.masthead .masthead-heading {
 .portfolio-modal .modal-content img {
   margin-bottom: 2rem;
 }
-.portfolio-modal .close-modal {
+.portfolio-modal .btn-close-modal {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -11529,7 +11529,7 @@ header.masthead .masthead-heading {
   cursor: pointer;
   background-color: transparent;
 }
-.portfolio-modal .close-modal:hover {
+.portfolio-modal .btn-close-modal:hover {
   opacity: 0.3;
 }
 
