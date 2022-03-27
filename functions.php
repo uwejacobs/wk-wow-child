@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) exit;
 
 require_once dirname( __FILE__ ) . '/inc/wp_bootstrap_navwalker.php';
+require_once dirname( __FILE__ ) . '/inc/custom-header.php';
 
 if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
     function wkwc_chld_thm_cfg_locale_css($uri){
@@ -27,7 +28,7 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 	wp_deregister_style('wk-wow-child-style');
 	wp_enqueue_style( 'wk-wow-child-style', get_stylesheet_uri() );
 
-	if (get_theme_mod( 'theme_option_setting') && get_theme_mod('theme_option_setting') !== 'default') {
+	if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
 	        wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css', array('wk-wow-bootstrap-css-child'));
 	}
 	wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
@@ -35,10 +36,10 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 	wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child"), '', true);
 	wp_add_inline_script('wk-wow-themejs-child', 'const WKWC_options = ' . json_encode(array(
 		'ajaxUrl' => admin_url('admin-ajax.php'),
-		'coverImageAni' => get_theme_mod('cover_image_ani'),
-		'headerAni' => get_theme_mod('header_ani'),
-		'buttonAni' => get_theme_mod('button_ani'),
-		'photoSellerGalleryAni' => get_theme_mod('photo_seller_gallery_ani'),
+		'coverImageAni' => get_theme_mod('cover_image_ani', 'none'),
+		'headerAni' => get_theme_mod('header_ani', 'none'),
+		'buttonAni' => get_theme_mod('button_ani', 'none'),
+		'photoSellerGalleryAni' => get_theme_mod('photo_seller_gallery_ani', 'none'),
 	)), 'before' );
     }
 
@@ -47,8 +48,7 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 
 if (!function_exists('wkwc_chld_thm_dequeue_parent_css')) {
     function wkwc_chld_thm_dequeue_parent_css(){
-		$wk_wow_fontawesome = get_theme_mod('load_fontawesome_setting');
-		if (empty($wk_wow_fontawesome) || $wk_wow_fontawesome === 'no') {
+		if (get_theme_mod('load_fontawesome_setting', 'no') === 'no') {
 			wp_dequeue_style('wk-wow-fontawesome-cdn');
 			wp_deregister_style('wk-wow-fontawesome-cdn');
 		}
@@ -56,7 +56,7 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_css')) {
 		wp_dequeue_style('wk-wow-bootstrap-css');
 		wp_deregister_style('wk-wow-bootstrap-css');
 		remove_action('wp_head', 'wk_wow_customizer_css');
-		if (get_theme_mod('theme_option_setting') && get_theme_mod('theme_option_setting') !== 'default') {
+		if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
 			wp_dequeue_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
 			wp_deregister_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
 		}
@@ -640,7 +640,7 @@ if (!function_exists('wkwc_customize_register_child')) {
 		) );
 		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'theme_option_setting', array(
 			'label' => __( 'Theme Option', 'wk-wow-child' ),
-			'description' => __('Don\'t forget to empty all settings in the Colors section if you choose a theme option other than Default.', 'wk-wow-child'),
+			'description' => __('Check all settings in the Colors section.', 'wk-wow-child'),
 			'section'    => 'typography',
 			'settings'   => 'theme_option_setting',
 			'type'    => 'select',
@@ -780,12 +780,41 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'choices' => $wkwc_animations
 		) ) );
 
+		$wp_customize->add_setting( 'navbar_color_setting', array(
+			'default'   => 'light',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		) );
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'navbar_color_setting', array(
+			'label' => __( 'Navigation Bar / Copyright Footer Background Color', 'wk-wow-child' ),
+			'description' => __('Set to Primary in case the Main Color is the same as the Primary Color.', 'wk-wow-child'),
+			'section'    => 'main_color_section',
+			'settings'   => 'navbar_color_setting',
+			'type'    => 'select',
+			'choices' => array(
+                        'main' => 'Main Color (or light if not set)',
+                        'transparent' => 'Transparent',
+                        'none' => 'None',
+                        'light' => 'Light',
+                        'dark' => 'Dark',
+                        'primary' => 'Primay',
+                        'secondary' => 'Secondary',
+                        'success' => 'Success',
+                        'info' => 'Info',
+                        'warning' => 'Warning',
+                        'danger' => 'Danger')
+
+		) ) );
+
 		$wp_customize->remove_control('cdn_assets');
 		$wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
-		$wp_customize->get_section('main_color_section')->description = __('These colors only affect the Default Preset Style.', 'wk-wow-child');
-		$wp_customize->get_control('header_textcolor')->description = __('Color for site title and description in header when Main Color is empty. Ignored if same as default text color.', 'wk-wow-child');
+		$wp_customize->get_section('main_color_section')->description = __('These colors overwrite the Theme Option under Preset Styles.', 'wk-wow-child');
+		$wp_customize->get_control('header_textcolor')->label = __('Site Title Color', 'wk-wow-child');
+		$wp_customize->get_control('header_textcolor')->description = __('Color for site title and description in navigation bar.', 'wk-wow-child');
 		$wp_customize->get_control('header_bg_color')->description = __('Color for header background when Header Image is not selected.', 'wk-wow-child');
-		$wp_customize->get_control('background_color')->description = __('Background color for body, except footer and copyright.', 'wk-wow-child');
+		$wp_customize->get_control('background_color')->label = __('Body Background Color', 'wk-wow-child');
+		$wp_customize->get_control('background_color')->description = __('Background color for body, except header, footer and copyright. The header banner background color overrides this setting for the header portion.', 'wk-wow-child');
 		$wp_customize->get_control('main_color')->description = __('Color for main elements.', 'wk-wow-child');
 	}
 
@@ -838,23 +867,28 @@ if (!function_exists('wk_wow_child_widgets_init')) {
 	add_action('widgets_init', 'wk_wow_child_widgets_init');
 }
 
+
 if (!function_exists('wkwc_customizer_css')) {
 	function wkwc_customizer_css()
 	{
 		?>
 	<style id="wk_wow_child_customizer_css" type="text/css">
+	<?php if (get_theme_mod('navbar_color_setting') === "transparent") { ?>
+	.navbar-transparent {
+		opacity: 0.75;
+	}
+	<?php } ?>
 	<?php if (!empty(get_theme_mod('header_bg_color_setting'))) { ?>
 	#page-sub-header {
-		background-color: <?php echo esc_html(get_theme_mod('header_bg_color_setting', '#000')); ?>;
+		background-color: <?php echo esc_html(get_theme_mod('header_bg_color_setting')); ?>;
 	}
 	<?php }
-		  if (!empty(get_theme_mod('main_color')) && get_theme_mod('main_color') !== '#ca4e07') {
+		  if (get_theme_mod('main_color') !== '#ca4e07') {
 			  $main_color = get_theme_mod('main_color'); ?>
+	.navbar-main-color,
 	#footer-widget .widget-title:after,
 	#wp-calendar #today,
 	#secondary .widget-title:after,
-	.navbar-toggler,
-	.navbar-nav .nav-link:before,
 	.wpcf7 input[type="submit"],
 	.wpcf7 input:hover[type="submit"],
 	.newsletter-subscribe .form-group .subscribe-submit,
@@ -883,13 +917,18 @@ if (!function_exists('wkwc_customizer_css')) {
 	.woocommerce.widget_shopping_cart .buttons a,
 	.woocommerce #respond input#submit:hover,
 	.woocommerce button.button:hover,
-	.woocommerce input.button:hover, .nav-link:before {
+	.woocommerce input.button:hover {
 	  background-color: <?php echo esc_html($main_color);?>;
 	}
 
-	.dropdown-item:hover, .dropdown-item:focus {
-		 background-color: <?php echo esc_html($main_color);?>!important;
+	.navbar-nav .nav-link:before {
+	  background-color: <?php echo esc_html($main_color);?>;
+	  filter: invert(80%);
 	}
+
+	/*.dropdown-item:hover, .dropdown-item:focus {
+		 background-color: <?php echo esc_html($main_color);?>!important;
+	}*/
 
 	.btn-circle,
 	.widget_tag_cloud .tagcloud a,
@@ -920,23 +959,20 @@ if (!function_exists('wkwc_customizer_css')) {
 	  color: <?php echo esc_html($main_color);?>;
 	}
 
-	@media screen and (min-width: 1200px){
+	/*@media screen and (min-width: 1200px){
 		 .navbar-nav .nav-link:before {
-			 background-color: <?php echo esc_html($main_color);?>;
+			 background-color: <?php echo esc_html($main_color); /*bugbug*/ ?>;
 		}
-	}
-	<?php
+	}*/
+	<?php /*
 	require_once dirname( __FILE__ ) . '/inc/color-css.php';
-	echo wkwc_generateColorCSS(get_theme_mod('main_color'), "primary");
-	}
-	?>
+	echo wkwc_generateColorCSS(get_theme_mod('main_color'), "primary"); // bugbug: setting needed? */
+	} ?>
 	</style>
 	<?php
 	}
 
-	if (get_theme_mod( 'theme_option_setting') && get_theme_mod('theme_option_setting') === 'default') {
-		add_action( 'wp_head', 'wkwc_customizer_css', 11);
-	}
+	add_action( 'wp_head', 'wkwc_customizer_css', 11);
 }
 
 if (!function_exists('wkwc_sanitize_meta_tag')) {
@@ -1001,76 +1037,66 @@ if (!function_exists('ujcf_save_post_bookings_callback')) {
 }
 
 if (!function_exists('wk_wow_child_bg_class')) {
-function wk_wow_child_bg_class() {
-    switch (get_theme_mod( 'theme_option_setting' )) {
-        case "cerulean":
-            return 'navbar-dark bg-primary';
-            break;
-        case "cosmo":
-            return 'navbar-dark bg-primary';
-            break;
-        case "cyborg":
-            return 'navbar-dark bg-dark';
-            break;
-        case "darkly":
-            return 'navbar-dark bg-primary';
-            break;
-        case "flatly":
-            return 'navbar-dark bg-primary';
-            break;
-        case "freelancer":
-            return 'navbar-dark bg-primary';
-            break;
-        case "journal":
-            return 'navbar-light bg-light';
-            break;
-        case "litera":
-            return 'navbar-light bg-light';
-            break;
-        case "lumen":
-            return 'navbar-light bg-light';
-            break;
-        case "lux":
-            return 'navbar-light bg-light';
-            break;
-        case "materia":
-            return 'navbar-dark bg-primary';
-            break;
-        case "minty":
-            return 'navbar-dark bg-primary';
-            break;
-        case "pulse":
-            return 'navbar-dark bg-primary';
-            break;
-        case "sandstone":
-            return 'navbar-dark bg-primary';
-            break;
-        case "simplex":
-            return 'navbar-light bg-light';
-            break;
-        case "sketchy":
-            return 'navbar-light bg-light';
-            break;
-        case "slate":
-            return 'navbar-dark bg-primary';
-            break;
-        case "solar":
-            return 'navbar-dark bg-dark';
-            break;
-        case "spacelab":
-            return 'navbar-light bg-light';
-            break;
-        case "superhero":
-            return 'navbar-dark bg-dark';
-            break;
-        case "united":
-            return 'navbar-dark bg-primary';
-            break;
-        case "yeti":
-            return 'navbar-dark bg-primary';
-            break;
-        default:
-            return 'navbar-light bg-light';
-    }
+	function wk_wow_child_bg_class() {
+		$color = get_theme_mod('navbar_color_setting');
+		$color = $color ?? 'light';
+		$main_color = get_theme_mod('main_color');
+		switch($color) {
+		case 'main':
+			if ($main_color) {
+				return 'navbar-' . (get_theme_mod('theme_option_setting') === 'default' ? "light" : "dark") . ' navbar-main-color';
+			} else {
+				return 'navbar-light bg-light';
+			}
+			break;
+		case 'none':
+			return 'navbar-light';
+			break;
+		case 'transparent':
+			return 'navbar-light bg-light navbar-transparent';
+			break;
+		case 'light':
+			return 'navbar-light bg-' . $color;
+			break;
+		default:
+			return 'navbar-' . (get_theme_mod('theme_option_setting') === 'default' ? "light" : "dark") . ' bg-' . $color;
+			break;
+		}
+	}
 }
+
+if (!function_exists('wk_wow_child_body_classes')) {
+	function wk_wow_child_body_classes( $classes ) {
+		$classes[] = 'navbar-color-' . get_theme_mod('navbar_color_setting', 'light');
+
+		$color = get_theme_mod('main_color');
+    		if ($color && $color !== '#ca4e07' ) {
+        		$classes[] = 'main-color';
+    		}
+
+		$color = get_theme_mod('header_bg_color_setting');
+    		if ($color && $color !== '#000' && $color !== '#000000') {
+        		$classes[] = 'header-bg-color';
+    		}
+
+		$color = get_header_textcolor();
+    		if ($color && $color !== '000' && $color !== '000000') {
+        		$classes[] = 'header-text-color';
+    		}
+
+		$color = get_background_color();
+    		if ($color && $color !== 'fff' && $color !== 'ffffff') {
+        		$classes[] = 'body-background-color';
+		}
+
+		$color = get_theme_mod('header_bg_color_setting');
+    		if ($color && $color !== '#000' && $color !== '#000000') {
+        		$classes[] = 'header-background-color';
+    		}
+
+        	return $classes;
+	}
+
+	add_filter( 'body_class', 'wk_wow_child_body_classes' );
 }
+

@@ -41,6 +41,18 @@ jQuery(document).ready(function($){
 
 	$('.page-scroller').off('click');
 
+	$( window ).resize(function() { setTopMargin(); });
+	setTopMargin();
+	function setTopMargin() {
+  		w = $(document).width();
+  		h = $("#wpadminbar").height();
+  		if (h > 0 && w > 600) {
+      			$("#masthead").css("margin-top", h + "px");
+  		} else {
+      			$("#masthead").css("margin-top", "0");
+  		}
+	}
+
     $(function($) {
       var offset = $('#masthead').height() + ($('#wpadminbar').height() ?? 0) + 20;
       $('a[href*=#]:not([href=#],.carousel-control-prev,.carousel-control-next)').click(function() {
