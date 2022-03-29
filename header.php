@@ -81,10 +81,10 @@
                 <div class="col my-auto">
 <?php if ( is_front_page() && is_home() ) :
                 ?>
-                <a class="site-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+                <a class="site-title text-decoration-none" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
                 <?php
                     else : ?>
-                        <a class="site-title" href="<?php echo esc_url( home_url( '/' )); ?>"><?php esc_url(bloginfo('name')); ?></a>
+                        <a class="site-title text-decoration-none" href="<?php echo esc_url( home_url( '/' )); ?>"><?php esc_url(bloginfo('name')); ?></a>
                     <?php endif; 
 
                        if ( get_theme_mod( 'show_site_description', 1 ) ) {
@@ -111,14 +111,11 @@
 					<a id="topbar-button-left" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
 				<?php } ?>
 
-                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" 
-		 aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
-		<?php $white_close_button = str_contains(wk_wow_child_bg_class(), "navbar-" . (get_theme_mod('theme_option_setting') !== 'default' ? "light" : "dark")); ?>
-		    <span class="btn-close<?php echo $white_close_button ? " btn-close-white" : "" ?>"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-		<div class="collapse navbar-collapse" id="main-nav">
+		<div class="collapse navbar-collapse" id="mainNav">
                 <?php
                 wp_nav_menu(array(
 			'theme_location'  => 'primary',

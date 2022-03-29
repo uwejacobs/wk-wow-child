@@ -29,7 +29,7 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 	wp_enqueue_style( 'wk-wow-child-style', get_stylesheet_uri() );
 
 	if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
-	        wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css', array('wk-wow-bootstrap-css-child'));
+		wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css', array('wk-wow-bootstrap-css-child'));
 	}
 	wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
 	wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
@@ -883,8 +883,7 @@ if (!function_exists('wkwc_customizer_css')) {
 		background-color: <?php echo esc_html(get_theme_mod('header_bg_color_setting')); ?>;
 	}
 	<?php }
-		  if (get_theme_mod('main_color') !== '#ca4e07') {
-			  $main_color = get_theme_mod('main_color'); ?>
+	 $main_color = get_theme_mod('main_color'); ?>
 	.navbar-main-color,
 	#footer-widget .widget-title:after,
 	#wp-calendar #today,
@@ -945,29 +944,25 @@ if (!function_exists('wkwc_customizer_css')) {
 	   border-top-color: <?php echo esc_html($main_color);?>;
 	}
 
-	h1,h2,h3,h4,h5,h6,.display-1,.display-2,.display-3,.display-4, display-5, display-6,
-	a,
-	a:hover,
-	a:focus,
-	a:active,
+	h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, display-5, display-6,
+	a, a:hover, a:focus, a:active,
 	#secondary ul li a[aria-current=page],
 	#secondary ul a:hover,
 	#secondary ul a:focus,
 	.btn-circle:hover,
 	.btn-circle:focus,
 	.woocommerce-Price-amount {
-	  color: <?php echo esc_html($main_color);?>;
+	  color: <?php echo esc_html($main_color) ?>;
 	}
 
-	/*@media screen and (min-width: 1200px){
-		 .navbar-nav .nav-link:before {
-			 background-color: <?php echo esc_html($main_color); /*bugbug*/ ?>;
-		}
-	}*/
-	<?php /*
-	require_once dirname( __FILE__ ) . '/inc/color-css.php';
-	echo wkwc_generateColorCSS(get_theme_mod('main_color'), "primary"); // bugbug: setting needed? */
-	} ?>
+	.widget a,.widget a:hover,.widget a:focus,.widget a:active {
+	  color: <?php echo esc_html($main_color) ?>;
+	}
+
+	<?php
+		 /* require_once dirname( __FILE__ ) . '/inc/color-css.php';
+		echo wkwc_generateColorCSS(get_theme_mod('main_color'), "primary"); // bugbug: setting needed? */
+	?>
 	</style>
 	<?php
 	}
@@ -1017,7 +1012,7 @@ if (!function_exists('ujcf_save_post_bookings_callback')) {
 
 			// don't run the echo if the function is called for saving revision.
 			$posttype = get_post_type($post_id);
-			if ($posttype !== 'bookings')
+			if ($posttype !== 'booking')
 				return;
 
 			$formatted_date = new DateTime($date);
@@ -1044,22 +1039,22 @@ if (!function_exists('wk_wow_child_bg_class')) {
 		switch($color) {
 		case 'main':
 			if ($main_color) {
-				return 'navbar-' . (get_theme_mod('theme_option_setting') === 'default' ? "light" : "dark") . ' navbar-main-color';
+				return 'navbar-dark navbar-main-color';
 			} else {
 				return 'navbar-light bg-light';
 			}
 			break;
 		case 'none':
-			return 'navbar-light';
+			return 'navbar-light no-background';
 			break;
 		case 'transparent':
-			return 'navbar-light bg-light navbar-transparent';
+			return 'navbar-light bg-light navbar-transparent transparent-background';
 			break;
 		case 'light':
 			return 'navbar-light bg-' . $color;
 			break;
 		default:
-			return 'navbar-' . (get_theme_mod('theme_option_setting') === 'default' ? "light" : "dark") . ' bg-' . $color;
+			return 'navbar-dark bg-' . $color;
 			break;
 		}
 	}

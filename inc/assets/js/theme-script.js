@@ -41,18 +41,6 @@ jQuery(document).ready(function($){
 
 	$('.page-scroller').off('click');
 
-	$( window ).resize(function() { setTopMargin(); });
-	setTopMargin();
-	function setTopMargin() {
-  		w = $(document).width();
-  		h = $("#wpadminbar").height();
-  		if (h > 0 && w > 600) {
-      			$("#masthead").css("margin-top", h + "px");
-  		} else {
-      			$("#masthead").css("margin-top", "0");
-  		}
-	}
-
     $(function($) {
       var offset = $('#masthead').height() + ($('#wpadminbar').height() ?? 0) + 20;
       $('a[href*=#]:not([href=#],.carousel-control-prev,.carousel-control-next)').click(function() {
@@ -68,6 +56,7 @@ jQuery(document).ready(function($){
           }
         }
       });
+
       //Executed on page load with URL containing an anchor tag.
       if($(location.href.split("#")[1])) {
           var target = $('#'+location.href.split("#")[1]);
@@ -79,4 +68,15 @@ jQuery(document).ready(function($){
           }
         }
     });
+	
+	$(window).scroll(function () {
+		var top = $(document).scrollTop();
+		if (top > 100) {
+		  $('#masthead.transparent-background').removeClass('navbar-transparent');
+		  $('#masthead.no-background').addClass('bg-light');
+		} else {
+		  $('#masthead.transparent-background').addClass('navbar-transparent');
+		  $('#masthead.no-background').removeClass('bg-light');
+		}
+	});
 });

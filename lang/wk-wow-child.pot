@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: WK Wow Child 1.1.0\n"
+"Project-Id-Version: WK Wow Child 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wk-wow-child\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-25T13:23:58-04:00\n"
+"POT-Creation-Date: 2022-03-28T16:21:56-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wk-wow-child\n"
@@ -268,98 +268,114 @@ msgid "Theme Option"
 msgstr ""
 
 #: functions.php:643
-msgid "Don't forget to empty all settings in the Colors section if you choose a theme option other than Default."
+msgid "Check all settings in the Colors section."
 msgstr ""
 
-#: functions.php:689
+#: functions.php:685
 msgid "Animations"
 msgstr ""
 
-#: functions.php:734
+#: functions.php:730
 msgid "Cover image"
 msgstr ""
 
-#: functions.php:735
+#: functions.php:731
 msgid "The Ken Burns animations work best."
 msgstr ""
 
-#: functions.php:749
+#: functions.php:745
 msgid "Header (h1-h6)"
 msgstr ""
 
-#: functions.php:750
+#: functions.php:746
 msgid "The Tracking and Focus animations work best."
 msgstr ""
 
-#: functions.php:764
+#: functions.php:760
 msgid "Button Hover"
 msgstr ""
 
-#: functions.php:765
+#: functions.php:761
 msgid "The Shake animations work best."
 msgstr ""
 
-#: functions.php:779
+#: functions.php:775
 msgid "WP Photo Seller Gallery Image"
 msgstr ""
 
-#: functions.php:780
+#: functions.php:776
 msgid "The Flip, Scale, Slide, Slit and Swing animations work best."
 msgstr ""
 
-#: functions.php:788
-msgid "Most Theme Options, other than Default, overwrite the Typography."
-msgstr ""
-
-#: functions.php:789
-msgid "These colors overwrite the Theme Option under Preset Styles. Leave empty when using a preset style other than Default."
-msgstr ""
-
 #: functions.php:790
-msgid "Color for site title and description in header when Main Color is empty. Ignored if same as default text color."
+msgid "Navigation Bar / Copyright Footer Background Color"
 msgstr ""
 
 #: functions.php:791
-msgid "Color for header background when Header Image is not selected."
+msgid "Set to Primary in case the Main Color is the same as the Primary Color."
 msgstr ""
 
-#: functions.php:792
-msgid "Background color for body, except footer and copyright."
-msgstr ""
-
-#: functions.php:793
-msgid "Color for main elements."
-msgstr ""
-
-#: functions.php:802
-msgid "Footer 4"
-msgstr ""
-
-#: functions.php:804
-#: functions.php:814
-#: functions.php:824
-#: functions.php:834
-msgid "Add widgets here."
+#: functions.php:811
+msgid "Most Theme Options, other than Default, overwrite the Typography."
 msgstr ""
 
 #: functions.php:812
+msgid "These colors overwrite the Theme Option under Preset Styles."
+msgstr ""
+
+#: functions.php:813
+msgid "Site Title Color"
+msgstr ""
+
+#: functions.php:814
+msgid "Color for site title and description in navigation bar."
+msgstr ""
+
+#: functions.php:815
+msgid "Color for header background when Header Image is not selected."
+msgstr ""
+
+#: functions.php:816
+msgid "Body Background Color"
+msgstr ""
+
+#: functions.php:817
+msgid "Background color for body, except header, footer and copyright. The header banner background color overrides this setting for the header portion."
+msgstr ""
+
+#: functions.php:818
+msgid "Color for main elements."
+msgstr ""
+
+#: functions.php:827
+msgid "Footer 4"
+msgstr ""
+
+#: functions.php:829
+#: functions.php:839
+#: functions.php:849
+#: functions.php:859
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:837
 msgid "Footer 5"
 msgstr ""
 
-#: functions.php:822
+#: functions.php:847
 msgid "Footer 6"
 msgstr ""
 
-#: functions.php:832
+#: functions.php:857
 msgid "Footer 7"
 msgstr ""
 
 #: header.php:69
-#: header.php:159
+#: header.php:157
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:115
+#: header.php:114
 msgid "Toggle navigation"
 msgstr ""
 
