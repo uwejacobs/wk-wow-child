@@ -1233,14 +1233,4 @@ Text Domain: wk-wow-child
 /** ==================================================================== Header Logo Size
 ==================================================================== */
  .custom-logo-col {display: inline-block; max-width: 100px; max-height: 100px;}
-
  .custom-logo-col img {max-width: 100%; height:auto;}
-
- .calendar-legend { font-size: 12px }
- .calendar-inquiry { background-color: grey }
- .calendar-tentative { background-color: lightsalmon }
- .calendar-booked { background-color: tomato }
- .calendar-event { background-color: SlateBlue }
- .calendar-holiday { background-color: DodgerBlue }
- .calendar-special { background-color: yellow }
- .calendar-legend { padding:5px; margin-right:20px; }
