@@ -28,6 +28,10 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 	wp_deregister_style('wk-wow-child-style');
 	wp_enqueue_style( 'wk-wow-child-style', get_stylesheet_uri() );
 
+	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+		wp_enqueue_style('wk-wow--child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
+	}
+
 	if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
 		wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css', array('wk-wow-bootstrap-css-child'));
 	}
