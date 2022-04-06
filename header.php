@@ -107,9 +107,7 @@
 				} else {
 					$wk_wow_child_button_slug_link = get_permalink(get_page_by_path($wk_wow_child_button_slug));
 				}
-				if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-					<a id="topbar-button-left" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
-				<?php } ?>
+				?>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'wk-wow-child' ); ?>">
                     <span class="navbar-toggler-icon"></span>
@@ -126,6 +124,9 @@
 			'depth' => 2,
 			'walker' => new bootstrap_5_wp_nav_menu_walker()
                 ));
+		if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
+			<a id="topbar-button-toggler" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
+				<?php }
                 ?>
 		</div>
 				<?php
@@ -140,14 +141,14 @@
     <?php if(is_front_page() && !get_theme_mod( 'header_banner_visibility' )): ?>
         <div id="page-sub-header" class="page-sub-header jarallax" <?php if(has_header_image()) { ?>style="background-image: url('<?php header_image(); ?>');" <?php } ?>>
             <div class="container">
-                <p id="header-banner-title" class="display-1">
+                <p id="header-banner-title" class="header-banner-title">
                     <?php
                     if(get_theme_mod( 'header_banner_title_setting' )){
                         echo esc_html(get_theme_mod( 'header_banner_title_setting' ));
                     }
                     ?>
                 </p>
-                <p id="header-banner-tagline">
+                <p id="header-banner-tagline" class="header-banner-tagline">
                     <?php
                     if(get_theme_mod( 'header_banner_tagline_setting' )){
                         echo esc_html(get_theme_mod( 'header_banner_tagline_setting' ));

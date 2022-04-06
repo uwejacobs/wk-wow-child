@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
 
 	// Cover Image Animarion
 	if (WKWC_options.coverImageAni && WKWC_options.coverImageAni !== "none") {
-		$('#page-sub-header').addClass('xanimated ' + WKWC_options.coverImageAni);
+		$('#page-sub-header').addClass('animated ' + WKWC_options.coverImageAni);
 	}
 	
 	// WP Photo 

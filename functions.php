@@ -5,6 +5,8 @@ if (!defined('ABSPATH')) exit;
 require_once dirname( __FILE__ ) . '/inc/wp_bootstrap_navwalker.php';
 require_once dirname( __FILE__ ) . '/inc/custom-header.php';
 
+register_nav_menu('mainNav', 'Main menu');
+
 if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
     function wkwc_chld_thm_cfg_locale_css($uri){
         if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
