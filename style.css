@@ -6,7 +6,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.1.3
+Version: 1.1.4
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.0
@@ -197,8 +197,10 @@ Text Domain: wk-wow-child
  .navbar-brand > a:visited, .navbar-brand > a:hover {
 	 text-decoration: none;
 }
+ @media(min-width:  1200px) {
  .dropdown:hover .dropdown-menu {
-         display: block;
+        display: block;
+ }
 }
 /*-------------------------------------------------------------- # page-sub-header --------------------------------------------------------------*/
  @media(max-width:  991.98px) {
@@ -659,7 +661,6 @@ Text Domain: wk-wow-child
  #masthead{
 	 margin-bottom: 0;
 	 position: fixed;
-	 /*top: 0;*/
 	 right: 0;
 	 left: 0;
 	 z-index: 1030;
@@ -668,7 +669,12 @@ Text Domain: wk-wow-child
 	 backdrop-filter: blur(10px);
 	 -webkit-backdrop-filter: blur(10px);
 }
- @media (max-width: 1199.98px){
+ @media screen and (max-width: 600px) {
+	#masthead {
+		position: absolute;
+	}
+}
+@media (max-width: 1199.98px){
 	 #masthead {
 		 padding: .74rem 1rem!important;
 		 border-bottom: none!important;
@@ -1201,7 +1207,7 @@ Text Domain: wk-wow-child
  .newsletter-subcribe .form-group .subcribe-submit:hover {
 	 opacity: 0.7;
 }
- .table td, .table th {
+ .newsletter-subcribe .table td, .newsletter-subcribe .table th {
 	 padding: 0.65rem!important;
 }
 /** ==================================================================== admin-bar ==================================================================== */
