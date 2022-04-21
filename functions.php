@@ -1101,3 +1101,21 @@ if (!function_exists('wk_wow_child_body_classes')) {
 	add_filter( 'body_class', 'wk_wow_child_body_classes' );
 }
 
+if (!function_exists('ujcf_change_yoast_description')) {
+	function ujcf_change_yoast_description($description) {
+	  $new_description = $description;
+
+	  if (get_bloginfo("name") == "MUNA Trading" && get_post_type() == "product") {
+		  $new_description = get_the_content();
+		  $new_description = preg_replace('~[\r\n]+~', ' ', $new_description);
+		  $new_description = preg_replace('[<]', ' <', $new_description);
+		  $new_description = preg_replace('[>]', '> ', $new_description);
+		  $new_description = strip_tags($new_description);
+		  $new_description = preg_replace('/\s+/', ' ', $new_description);
+	  }
+
+	  return $new_description;
+	}
+
+	add_filter('wpseo_metadesc','ujcf_change_yoast_description',100,1);
+}

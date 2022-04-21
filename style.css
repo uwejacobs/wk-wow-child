@@ -1183,8 +1183,14 @@ Text Domain: wk-wow-child
 	 padding-right: 30px;
 	 padding-left: 10px;
 }
-.wpcf7 textarea {
+ .wpcf7 textarea {
     height: 8em;
+}
+ .wpcf7-starrating.form-control {
+	border: 0 !important;
+}
+ span.star-rating-control {
+	 float: right !important;
 }
 /** ==================================================================== newsletter-subcribe ==================================================================== */
  .newsletter-subcribe .form-group .subcribe-submit {
