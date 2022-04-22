@@ -637,6 +637,77 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'priority' => 10,
 		)));
 
+		$wp_customize->add_setting('social_angi_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'social_angi', array(
+			'label' => __('Angi URL', 'wk-wow-child'),
+			'section'    => 'social',
+			'settings'   => 'social_angi_setting',
+			'type' => 'text',
+			'priority' => 10,
+		)));
+
+		$wp_customize->add_setting('review_facebook_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'review_facebook', array(
+			'label' => __('Facebook Review URL', 'wk-wow-child'),
+			'section'    => 'social',
+			'settings'   => 'review_facebook_setting',
+			'type' => 'text',
+			'priority' => 20,
+		)));
+
+		$wp_customize->add_setting('review_google_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'review_google', array(
+			'label' => __('Google My Business Review URL', 'wk-wow-child'),
+			'section'    => 'social',
+			'settings'   => 'review_google_setting',
+			'type' => 'text',
+			'priority' => 20,
+		)));
+
+		$wp_customize->add_setting('review_yelp_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'review_yelp', array(
+			'label' => __('Yelp Review URL', 'wk-wow-child'),
+			'section'    => 'social',
+			'settings'   => 'review_yelp_setting',
+			'type' => 'text',
+			'priority' => 20,
+		)));
+
+		$wp_customize->add_setting('review_angi_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'review_angi', array(
+			'label' => __('Angi Review URL', 'wk-wow-child'),
+			'section'    => 'social',
+			'settings'   => 'review_angi_setting',
+			'type' => 'text',
+			'priority' => 10,
+		)));
+
+
 		//Theme Option
 		$wp_customize->add_setting( 'theme_option_setting', array(
 			'default'   => 'default',
