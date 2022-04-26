@@ -1190,3 +1190,41 @@ if (!function_exists('ujcf_change_yoast_description')) {
 
 	add_filter('wpseo_metadesc','ujcf_change_yoast_description',100,1);
 }
+
+if (!function_exists('ujcf_delete_product_images')) {
+	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) && get_bloginfo("name") == "MUNA Trading" ) {
+		//hooking into WP event
+		add_action( 'before_delete_post', 'ujcf_delete_product_images', 10, 1 );
+
+		function ujcf_delete_product_images( $post_id ) {
+			//get product id
+			$product = wc_get_product( $post_id );
+
+			//failsafe
+			if ( ! $product ) {
+				return;
+			}
+
+			//get images
+			$featured_image_id  = $product->get_image_id();
+			$image_galleries_id = $product->get_gallery_image_ids();
+
+			//delete featured
+			if ( ! empty( $featured_image_id ) ) {
+				wp_delete_post( $featured_image_id );
+			}
+
+			//delete gallery/attachment
+			if ( ! empty( $image_galleries_id ) ) {
+				foreach ( $image_galleries_id as $single_image_id ) {
+					wp_delete_post( $single_image_id );
+				}
+			}
+		}
+	}
+}
+
+// Order # in post list
+add_action( 'admin_init', function() {
+    add_post_type_support( 'post', 'page-attributes' );
+});
