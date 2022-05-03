@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 require_once dirname( __FILE__ ) . '/inc/wp_bootstrap_navwalker.php';
 require_once dirname( __FILE__ ) . '/inc/custom-header.php';
+require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
 
 register_nav_menu('mainNav', 'Main menu');
 
@@ -1053,61 +1054,6 @@ if (!function_exists('wkwc_sanitize_meta_tag')) {
 	}
 }
 
-
-// Expire bookings
-if (!function_exists('ujcf_save_post_bookings_callback')) {
-	function ujcf_save_post_bookings_callback($post_id, $post, $update){
-		if (empty($_POST['acf']))
-			return;
-
-		if (isset($_POST['acf']['field_621eb0e90d330']) || isset($_POST['acf']['field_621eb287b16e3'])) {
-			remove_action( 'save_post', 'expirationdate_update_post_meta');
-
-			// Check if the post has a end or start date value
-			if (!empty($_POST['acf']['field_621eb287b16e3'])) {
-				$date = $_POST['acf']['field_621eb287b16e3'];
-				ujcf_expirationdate_update_post_meta_acf($post_id, $date);
-			}
-			else if (!empty($_POST['acf']['field_621eb0e90d330'])) {
-				$date = $_POST['acf']['field_621eb0e90d330'];
-				ujcf_expirationdate_update_post_meta_acf($post_id, $date);
-			}
-			else {
-				// Unschedule any existing event if the field is blank
-				postexpirator_unschedule_event($post_id);
-			}
-		}
-	}
-
-	add_action('save_post','ujcf_save_post_bookings_callback', 10, 3);
-
-	if (!function_exists('ujcf_expirationdate_update_post_meta_acf')) {
-		function ujcf_expirationdate_update_post_meta_acf($post_id, $date) {
-			// don't run the echo if this is an auto save
-			if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-				return;
-
-			// don't run the echo if the function is called for saving revision.
-			$posttype = get_post_type($post_id);
-			if ($posttype !== 'booking')
-				return;
-
-			$formatted_date = new DateTime($date);
-			$formatted_date->modify('first day of next month');
-			$month   = intval($formatted_date->format('m'));
-			$day     = intval($formatted_date->format('d'));
-			$year    = intval($formatted_date->format('y'));
-
-			$ts = get_gmt_from_date("$year-$month-$day 00:00:00",'U');
-			$opts = [];
-			$opts['expireType'] = 'draft';
-			$opts['id'] = $post_id;
-
-			postexpirator_schedule_event($post_id,$ts,$opts);
-		}
-	}
-}
-
 if (!function_exists('wk_wow_child_bg_class')) {
 	function wk_wow_child_bg_class() {
 		$color = get_theme_mod('navbar_color_setting');
@@ -1171,60 +1117,3 @@ if (!function_exists('wk_wow_child_body_classes')) {
 
 	add_filter( 'body_class', 'wk_wow_child_body_classes' );
 }
-
-if (!function_exists('ujcf_change_yoast_description')) {
-	function ujcf_change_yoast_description($description) {
-	  $new_description = $description;
-
-	  if (get_bloginfo("name") == "MUNA Trading" && get_post_type() == "product") {
-		  $new_description = get_the_content();
-		  $new_description = preg_replace('~[\r\n]+~', ' ', $new_description);
-		  $new_description = preg_replace('[<]', ' <', $new_description);
-		  $new_description = preg_replace('[>]', '> ', $new_description);
-		  $new_description = strip_tags($new_description);
-		  $new_description = preg_replace('/\s+/', ' ', $new_description);
-	  }
-
-	  return $new_description;
-	}
-
-	add_filter('wpseo_metadesc','ujcf_change_yoast_description',100,1);
-}
-
-if (!function_exists('ujcf_delete_product_images')) {
-	if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) && get_bloginfo("name") == "MUNA Trading" ) {
-		//hooking into WP event
-		add_action( 'before_delete_post', 'ujcf_delete_product_images', 10, 1 );
-
-		function ujcf_delete_product_images( $post_id ) {
-			//get product id
-			$product = wc_get_product( $post_id );
-
-			//failsafe
-			if ( ! $product ) {
-				return;
-			}
-
-			//get images
-			$featured_image_id  = $product->get_image_id();
-			$image_galleries_id = $product->get_gallery_image_ids();
-
-			//delete featured
-			if ( ! empty( $featured_image_id ) ) {
-				wp_delete_post( $featured_image_id );
-			}
-
-			//delete gallery/attachment
-			if ( ! empty( $image_galleries_id ) ) {
-				foreach ( $image_galleries_id as $single_image_id ) {
-					wp_delete_post( $single_image_id );
-				}
-			}
-		}
-	}
-}
-
-// Order # in post list
-add_action( 'admin_init', function() {
-    add_post_type_support( 'post', 'page-attributes' );
-});
