@@ -42,6 +42,20 @@ if (!function_exists('ujcfe_getSiteOwnerLocationAddress')) {
 	add_shortcode("cts_site_owner_location_address", "ujcfe_getSiteOwnerLocationAddress");
 }
 
+if (!function_exists('ujcfe_getSiteOwnerYearFounded')) {
+	function ujcfe_getSiteOwnerYearFounded($atts) {
+		return str_replace("\n", '<br clear="none"/>', get_theme_mod("site_owner_year_founded_setting"));
+	}
+	add_shortcode("cts_site_owner_year_founded", "ujcfe_getSiteOwnerYearFounded");
+}
+
+if (!function_exists('ujcfe_getSiteOwnerCompanyAge')) {
+	function ujcfe_getSiteOwnerCompanyAge($atts) {
+		return date('Y') - intval(get_theme_mod("site_owner_year_founded_setting"));
+	}
+	add_shortcode("cts_site_owner_company_age", "ujcfe_getSiteOwnerCompanyAge");
+}
+
 if (!function_exists('ujcfe_getSiteOwnerMailingAddress')) {
 	function ujcfe_getSiteOwnerMailingAddress($atts) {
 		$address = get_theme_mod("site_owner_mailing_address_setting");

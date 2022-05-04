@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: WK Wow Child 1.1.6\n"
+"Project-Id-Version: WK Wow Child 1.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/wk-wow-child\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-03T15:19:50-04:00\n"
+"POT-Creation-Date: 2022-05-04T16:51:32-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: wk-wow-child\n"
@@ -169,9 +169,9 @@ msgid "Phone number"
 msgstr ""
 
 #: functions.php:341
-#: functions.php:413
-#: functions.php:456
-#: functions.php:499
+#: functions.php:433
+#: functions.php:476
+#: functions.php:519
 msgid "Format the phone number for readability."
 msgstr ""
 
@@ -179,214 +179,218 @@ msgstr ""
 msgid "Location address"
 msgstr ""
 
-#: functions.php:369
+#: functions.php:370
+msgid "Year founded"
+msgstr ""
+
+#: functions.php:389
 msgid "Mailing address"
 msgstr ""
 
-#: functions.php:370
+#: functions.php:390
 msgid "If different from location address."
 msgstr ""
 
-#: functions.php:384
+#: functions.php:404
 msgid "Contact 1 name"
 msgstr ""
 
-#: functions.php:398
+#: functions.php:418
 msgid "Contact 1 email address"
 msgstr ""
 
-#: functions.php:412
+#: functions.php:432
 msgid "Contact 1 phone number"
 msgstr ""
 
-#: functions.php:427
+#: functions.php:447
 msgid "Contact 2 name"
 msgstr ""
 
-#: functions.php:441
+#: functions.php:461
 msgid "Contact 2 email address"
 msgstr ""
 
-#: functions.php:455
+#: functions.php:475
 msgid "Contact 2 phone number"
 msgstr ""
 
-#: functions.php:470
+#: functions.php:490
 msgid "Contact 3 name"
 msgstr ""
 
-#: functions.php:484
+#: functions.php:504
 msgid "Contact 3 email address"
 msgstr ""
 
-#: functions.php:498
+#: functions.php:518
 msgid "Contact 3 phone number"
 msgstr ""
 
-#: functions.php:510
+#: functions.php:530
 msgid "Social accounts"
 msgstr ""
 
-#: functions.php:522
+#: functions.php:542
 msgid "Google My Business URL"
 msgstr ""
 
-#: functions.php:536
+#: functions.php:556
 msgid "Microsoft Bing Places for Business URL"
 msgstr ""
 
-#: functions.php:550
+#: functions.php:570
 msgid "Yelp URL"
 msgstr ""
 
-#: functions.php:564
+#: functions.php:584
 msgid "Facebook URL"
 msgstr ""
 
-#: functions.php:578
+#: functions.php:598
 msgid "Instagram URL"
 msgstr ""
 
-#: functions.php:592
+#: functions.php:612
 msgid "Youtube URL"
 msgstr ""
 
-#: functions.php:606
+#: functions.php:626
 msgid "Twitter URL"
 msgstr ""
 
-#: functions.php:620
+#: functions.php:640
 msgid "LinkedIn URL"
 msgstr ""
 
-#: functions.php:634
+#: functions.php:654
 msgid "nextdoor URL"
 msgstr ""
 
-#: functions.php:648
+#: functions.php:668
 msgid "Angi URL"
 msgstr ""
 
-#: functions.php:662
+#: functions.php:682
 msgid "Facebook Review URL"
 msgstr ""
 
-#: functions.php:676
+#: functions.php:696
 msgid "Google My Business Review URL"
 msgstr ""
 
-#: functions.php:690
+#: functions.php:710
 msgid "Yelp Review URL"
 msgstr ""
 
-#: functions.php:704
+#: functions.php:724
 msgid "Angi Review URL"
 msgstr ""
 
-#: functions.php:720
+#: functions.php:740
 msgid "Theme Option"
 msgstr ""
 
-#: functions.php:721
+#: functions.php:741
 msgid "Check all settings in the Colors section."
 msgstr ""
 
-#: functions.php:763
+#: functions.php:783
 msgid "Animations"
 msgstr ""
 
-#: functions.php:808
+#: functions.php:828
 msgid "Cover image"
 msgstr ""
 
-#: functions.php:809
+#: functions.php:829
 msgid "The Ken Burns animations work best."
 msgstr ""
 
-#: functions.php:823
+#: functions.php:843
 msgid "Header (h1-h6)"
 msgstr ""
 
-#: functions.php:824
+#: functions.php:844
 msgid "The Tracking and Focus animations work best."
 msgstr ""
 
-#: functions.php:838
+#: functions.php:858
 msgid "Button Hover"
 msgstr ""
 
-#: functions.php:839
+#: functions.php:859
 msgid "The Shake animations work best."
 msgstr ""
 
-#: functions.php:853
+#: functions.php:873
 msgid "WP Photo Seller Gallery Image"
 msgstr ""
 
-#: functions.php:854
+#: functions.php:874
 msgid "The Flip, Scale, Slide, Slit and Swing animations work best."
 msgstr ""
 
-#: functions.php:868
+#: functions.php:888
 msgid "Navigation Bar / Copyright Footer Background Color"
 msgstr ""
 
-#: functions.php:869
+#: functions.php:889
 msgid "Set to Primary in case the Main Color is the same as the Primary Color."
 msgstr ""
 
-#: functions.php:889
+#: functions.php:909
 msgid "Most Theme Options, other than Default, overwrite the Typography."
 msgstr ""
 
-#: functions.php:890
+#: functions.php:910
 msgid "These colors overwrite the Theme Option under Preset Styles."
 msgstr ""
 
-#: functions.php:891
+#: functions.php:911
 msgid "Site Title Color"
 msgstr ""
 
-#: functions.php:892
+#: functions.php:912
 msgid "Color for site title and description in navigation bar."
 msgstr ""
 
-#: functions.php:893
+#: functions.php:913
 msgid "Color for header background when Header Image is not selected."
 msgstr ""
 
-#: functions.php:894
+#: functions.php:914
 msgid "Body Background Color"
 msgstr ""
 
-#: functions.php:895
+#: functions.php:915
 msgid "Background color for body, except header, footer and copyright. The header banner background color overrides this setting for the header portion."
 msgstr ""
 
-#: functions.php:896
+#: functions.php:916
 msgid "Color for main elements."
 msgstr ""
 
-#: functions.php:905
+#: functions.php:925
 msgid "Footer 4"
 msgstr ""
 
-#: functions.php:907
-#: functions.php:917
 #: functions.php:927
 #: functions.php:937
+#: functions.php:947
+#: functions.php:957
 msgid "Add widgets here."
 msgstr ""
 
-#: functions.php:915
+#: functions.php:935
 msgid "Footer 5"
 msgstr ""
 
-#: functions.php:925
+#: functions.php:945
 msgid "Footer 6"
 msgstr ""
 
-#: functions.php:935
+#: functions.php:955
 msgid "Footer 7"
 msgstr ""
 

@@ -359,6 +359,26 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'priority' => 20,
 		)));
 
+		$wp_customize->add_setting('site_owner_year_founded_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback'    => 'absint',
+			'sanitize_js_callback' => 'absint',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'site_owner_year_founded', array(
+			'label' => __('Year founded', 'wk-wow-child'),
+			'section'    => 'site_owner',
+			'settings'   => 'site_owner_year_founded_setting',
+			'type' => 'number',
+			'input_attrs' => array(
+				'min'  => 1900,
+				'max'  => date('Y'),
+				'step' => 1,
+			),
+			'priority' => 20,
+		)));
+
 		$wp_customize->add_setting('site_owner_mailing_address_setting', array(
 			'default'   => '',
 			'type'       => 'theme_mod',
