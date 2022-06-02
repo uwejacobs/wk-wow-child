@@ -6,7 +6,7 @@ jQuery(document).ready(function($){
 	$(".mailpoet_form_columns").addClass("form-inline");
 	$(".mailpoet_form_columns input").addClass("form-control");
 	$("input.mailpoet_submit").addClass("btn btn-success");
-	$('table').addClass('table');
+	$("table").not(".opening-hours").addClass("table");
 
 	// Cover Image Animarion
 	if (WKWC_options.coverImageAni && WKWC_options.coverImageAni !== "none") {

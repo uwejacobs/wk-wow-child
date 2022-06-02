@@ -345,6 +345,21 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'priority' => 20,
 		)));
 
+		$wp_customize->add_setting('site_owner_fax_setting', array(
+			'default'   => '',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		));
+		$wp_customize->add_control(new WP_Customize_Control($wp_customize, 'site_owner_fax', array(
+			'label' => __('Fax number', 'wk-wow-child'),
+			'description' => __('Format the fax number for readability.', 'wk-wow-child'),
+			'section'    => 'site_owner',
+			'settings'   => 'site_owner_fax_setting',
+			'type' => 'text',
+			'priority' => 20,
+		)));
+
 		$wp_customize->add_setting('site_owner_location_address_setting', array(
 			'default'   => '',
 			'type'       => 'theme_mod',

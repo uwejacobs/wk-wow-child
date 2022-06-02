@@ -35,6 +35,15 @@ if (!function_exists('ujcfe_getSiteOwnerPhone')) {
 	add_shortcode("cts_site_owner_phone", "ujcfe_getSiteOwnerPhone");
 }
 
+if (!function_exists('ujcfe_getSiteOwnerFax')) {
+	function ujcfe_getSiteOwnerFax($atts) {
+		$fax = get_theme_mod("site_owner_fax_setting");
+		
+		return ujcfe_formatFax($fax);
+	}
+	add_shortcode("cts_site_owner_fax", "ujcfe_getSiteOwnerFax");
+}
+
 if (!function_exists('ujcfe_getSiteOwnerLocationAddress')) {
 	function ujcfe_getSiteOwnerLocationAddress($atts) {
 		return str_replace("\n", '<br clear="none"/>', get_theme_mod("site_owner_location_address_setting"));
@@ -74,7 +83,8 @@ if (!function_exists('ujcfe_getFullLocationAddress')) {
 		$s .= '[cts_site_owner_company]<br clear="none"/>';
 		$s .= '[cts_site_owner_location_address]<br clear="none"/>';
 		$s .= '[cts_site_owner_email]<br clear="none"/>';
-		$s .= '[cts_site_owner_phone]';
+		$s .= '[cts_site_owner_phone]<br clear="none"/>';
+		$s .= '[cts_site_owner_fax]';
 		$s .= '</div>';
 		
 		return do_shortcode($s);
@@ -551,6 +561,16 @@ if (!function_exists('ujcfe_formatPhone')) {
 	function ujcfe_formatPhone($phone) {
 		if (!empty($phone)) {
 			return '<i class="fas fa-mobile-alt fa-fw me-2"></i><a href="tel:' . esc_attr(preg_replace('/[^0-9]/', '', $phone)) . '">'. esc_html($phone). '</a>';
+		}
+		
+		return '';
+	}
+}
+
+if (!function_exists('ujcfe_formatFax')) {
+	function ujcfe_formatFax($fax) {
+		if (!empty($fax)) {
+			return '<i class="fas fa-fax fa-fw me-2"></i>' . esc_html($fax);
 		}
 		
 		return '';
