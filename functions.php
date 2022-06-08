@@ -20,7 +20,11 @@ if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
 
 if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     function wkwc_chld_thm_cfg_css_js() {
-	wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
+	if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
+		wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css');
+	} else {
+		wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
+	}
 	wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
 	wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
 
@@ -35,9 +39,6 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 		wp_enqueue_style('wk-wow--child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
 	}
 
-	if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
-		wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css', array('wk-wow-bootstrap-css-child'));
-	}
 	wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
 	wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
 	wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child"), '', true);
@@ -1073,8 +1074,8 @@ if (!function_exists('wkwc_customizer_css')) {
 	}
 
 	<?php
-		 /* require_once dirname( __FILE__ ) . '/inc/color-css.php';
-		echo wkwc_generateColorCSS(get_theme_mod('main_color'), "primary"); // bugbug: setting needed? */
+		require_once dirname( __FILE__ ) . '/inc/color-css.php';
+		echo wkwc_generateColorCSS(get_theme_mod('main_color'), "main");
 	?>
 	</style>
 	<?php
