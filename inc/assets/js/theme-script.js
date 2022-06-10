@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 	$("input.mailpoet_submit").addClass("btn btn-success");
 	$("table").not(".opening-hours").addClass("table");
 
-	// Cover Image Animarion
+	// Cover Image Animation
 	if (WKWC_options.coverImageAni && WKWC_options.coverImageAni !== "none") {
 		$('#page-sub-header').addClass('animated ' + WKWC_options.coverImageAni);
 	}
@@ -33,6 +33,11 @@ jQuery(document).ready(function($){
 				$(this).removeClass('animated ' + WKWC_options.buttonAni);
 			}
 		);
+	}
+
+    // Features
+	if (WKWC_options.featureAni && WKWC_options.featureAni !== "none") {
+		$('.single-feature').addClass('animated ' + WKWC_options.featureAni);
 	}
 
     // Pause animation until element is visible

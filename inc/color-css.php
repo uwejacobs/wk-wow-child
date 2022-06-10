@@ -1,6 +1,10 @@
 <?php
 if (!function_exists('wkwc_generateColorCSS')) {
 	function wkwc_generateColorCSS($hexColor, $name) {
+		if (empty($hexColor) || empty($name)) {
+			return "";
+		}
+
 		$hexColor = sanitize_hex_color($hexColor);
 		$name = sanitize_html_class($name);
 

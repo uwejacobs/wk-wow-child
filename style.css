@@ -6,7 +6,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.1.9
+Version: 1.2.0
 Requires at least: 5.0
 Tested up to: 5.9.3
 Requires PHP: 7.0
@@ -1231,13 +1231,67 @@ Text Domain: wk-wow-child
 	 height: 10px !important;
 	 border-radius: 50%;
 }
-
-
-
-
-
-
-/** ==================================================================== Header Logo Size
-==================================================================== */
+/** ==================================================================== Header Logo Size ==================================================================== */
  .custom-logo-col {display: inline-block; max-width: 100px; max-height: 100px;}
  .custom-logo-col img {max-width: 100%; height:auto;}
+/** ==================================================================== Features ==================================================================== */
+/*.single-features-1*/ .single-feature:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+  border-top: 3px solid;
+  border-bottom: 3px solid;
+}
+
+ @media only screen and (min-width: 1400px)
+ .single-features-1 .single-feature {
+  padding: 40px;
+}
+ .single-features-1 .single-feature {
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  box-shadow: 0px 5px 25px rgba(218, 211, 211, 0.3);
+  text-align: center;
+}
+ .single-features-1 .single-feature .image {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.single-features-2 .single-feature {
+  padding: 30px 35px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  box-shadow: 0px 5px 25px rgba(218, 211, 211, 0.3);
+}
+.single-features-2 .single-feature .icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #2F80ED;
+  color: #ffffff;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: -60px;
+}
+.single-features-3 .single-feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1.5rem;
+}
+ .mb-25 {
+  margin-bottom: 25px;
+}
+ .mb-15 {
+  margin-bottom: 15px;
+}
+ .mb-60 {
+  margin-bottom: 60px;
+}

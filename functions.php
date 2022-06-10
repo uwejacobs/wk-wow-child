@@ -47,6 +47,7 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 		'coverImageAni' => get_theme_mod('cover_image_ani', 'none'),
 		'headerAni' => get_theme_mod('header_ani', 'none'),
 		'buttonAni' => get_theme_mod('button_ani', 'none'),
+		'featureAni' => get_theme_mod('feature_ani', 'none'),
 		'photoSellerGalleryAni' => get_theme_mod('photo_seller_gallery_ani', 'none'),
 	)), 'before' );
     }
@@ -803,6 +804,8 @@ if (!function_exists('wkwc_customize_register_child')) {
 
 		$wkwc_animations = array(
 			'none' =>'No animations',
+			'fade-in-bottom'       => 'Fade in bottom',
+			'fade-in-top'          => 'Fade in top',
 			'flip-in-hor-bottom'   => 'Flip in horizontal bottom',
 			'flip-in-hor-top'      => 'Flip in horizontal top',
 			'flip-in-ver-left'     => 'Flip in vertical left',
@@ -860,6 +863,21 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'description' => __('The Tracking and Focus animations work best.', 'wk-wow-child'),
 			'section'    => 'animations',
 			'settings'   => 'header_ani',
+			'type'    => 'select',
+			'choices' => $wkwc_animations
+		) ) );
+
+		$wp_customize->add_setting( 'feature_ani', array(
+			'default'   => 'fade-in-bottom',
+			'type'       => 'theme_mod',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'wp_filter_nohtml_kses',
+		) );
+		$wp_customize->add_control( new WP_Customize_Control($wp_customize, 'feature_ani', array(
+			'label' => __( 'Feature', 'wk-wow-child' ),
+			'description' => __('The Fade-In animations work best.', 'wk-wow-child'),
+			'section'    => 'animations',
+			'settings'   => 'feature_ani',
 			'type'    => 'select',
 			'choices' => $wkwc_animations
 		) ) );
@@ -1056,6 +1074,11 @@ if (!function_exists('wkwc_customizer_css')) {
 
 	.preloader div {
 	   border-top-color: <?php echo esc_html($main_color);?>;
+	}
+	
+	.single-feature:hover {
+      border-top-color: <?php echo esc_html($main_color);?>;
+      border-bottom-color: <?php echo esc_html($main_color);?>;
 	}
 
 	h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, display-5, display-6,
