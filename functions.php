@@ -882,6 +882,24 @@ if (!function_exists('wkwc_customize_register_child')) {
 			'choices' => $wkwc_animations
 		) ) );
 
+		$wp_customize->add_setting('feature_hover_scale', array(
+			'default' => __('no','wk-wow-child'),
+			'sanitize_callback' => 'sanitize_text_field',
+		));
+		$wp_customize->add_control(
+			'load_fontawesome',
+			array(
+				'label' => __('Scale Feature Up on Hover', 'wk-wow-child'),
+				'description' => __('Scale Feature up on hover and show a border at top and bottom.', 'wk-wow-child'),
+				'section' => 'animations',
+				'settings' => 'feature_hover_scale',
+					'type'    => 'select',
+					'choices' => array(
+						'yes' => __('Yes', 'wk-wow-child'),
+						'no' => __('No', 'wk-wow-child'),
+					),
+		));
+
 		$wp_customize->add_setting( 'button_ani', array(
 			'default'   => 'shake-horizontal',
 			'type'       => 'theme_mod',
@@ -1076,10 +1094,18 @@ if (!function_exists('wkwc_customizer_css')) {
 	   border-top-color: <?php echo esc_html($main_color);?>;
 	}
 	
-	.single-feature:hover {
-      border-top-color: <?php echo esc_html($main_color);?>;
-      border-bottom-color: <?php echo esc_html($main_color);?>;
+	<?php if (get_theme_mod('feature_hover_scale') === "yes") { ?>
+	.single-feature:hover, .contact .listing-item:hover {
+	  -webkit-transform: scale(1.05) !important;
+	  transform: scale(1.05) !important;
 	}
+	@media (prefers-reduced-motion) {
+		.single-feature:hover {
+		  -webkit-transform: none !important;
+		  transform: none !important;
+		}
+	}
+	<?php } ?>
 
 	h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, display-5, display-6,
 	a, a:hover, a:focus, a:active,

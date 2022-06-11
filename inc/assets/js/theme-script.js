@@ -38,6 +38,7 @@ jQuery(document).ready(function($){
     // Features
 	if (WKWC_options.featureAni && WKWC_options.featureAni !== "none") {
 		$('.single-feature').addClass('animated ' + WKWC_options.featureAni);
+		$('.contact .listing-item').addClass('animated ' + WKWC_options.featureAni);
 	}
 
     // Pause animation until element is visible
