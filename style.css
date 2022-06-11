@@ -1271,7 +1271,7 @@ Text Domain: wk-wow-child
   margin-bottom: 20px;
   margin-top: -60px;
 }
-.single-features-3 .single-feature {
+.single-features-3 .single-feature .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
