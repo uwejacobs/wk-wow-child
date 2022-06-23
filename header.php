@@ -139,7 +139,36 @@
         </div>
     </header><!-- #masthead -->
     <?php if(is_front_page() && !get_theme_mod( 'header_banner_visibility' )): ?>
-        <div id="page-sub-header" class="page-sub-header jarallax" <?php if(has_header_image()) { ?>style="background-image: url('<?php header_image(); ?>');" <?php } ?>>
+	<div id="page-sub-header" class="page-sub-header jarallax">
+<?php if(has_header_image()) { ?>
+	    <img id="page-sub-header-img" class="jarallax-img" src="<?php header_image(); ?>" />
+<?php if(get_theme_mod('cover_slider_setting') == 'yes') {
+$headers = get_uploaded_header_images();
+$images = [];
+foreach($headers as $header) {
+    $images[] = "'" . $header["url"] . "'";
+}
+$interval = get_theme_mod('cover_slider_speed_setting');
+if ($interval < 1 || $interval > 10) {
+	$interval = 5;
+}
+?>
+<script>
+window.addEventListener('load', (event) => {
+var images = new Array(<?php echo join(',', $images); ?>);
+    var image_cnt = 1;
+
+    setInterval(function(){
+        if (++image_cnt >= images.length) {
+            image_cnt = 0;
+        }
+
+        document.getElementById("page-sub-header-img").src  = images[image_cnt];
+    }, <?php echo $interval; ?>000);
+});
+</script>
+<?php }
+} ?>
             <div class="container">
                 <p id="header-banner-title" class="header-banner-title">
                     <?php

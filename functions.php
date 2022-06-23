@@ -80,6 +80,8 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_js')) {
 		wp_deregister_script('wk-wow-popper');
 		wp_dequeue_script('wk-wow-bootstrapjs');
 		wp_deregister_script('wk-wow-bootstrapjs');
+                wp_deregister_script( 'wk-wow-jarallax-js'); 
+                wp_dequeue_script( 'wk-wow-jarallax-js'); 
 	}
 
 	add_action('wp_print_scripts', 'wkwc_chld_thm_dequeue_parent_js', 11);
@@ -957,6 +959,48 @@ if (!function_exists('wkwc_customize_register_child')) {
 
 		) ) );
 
+		/* Header Image */
+                $wp_customize->add_setting('cover_slider_setting', array(
+                        'default' => __('no','wk-wow-child'),
+                        'sanitize_callback' => 'sanitize_text_field',
+                ));
+                $wp_customize->add_control(
+                        'cover_slider_setting',
+                        array(
+                                'label' => __('Cycle through all uploaded images', 'wk-wow-child'),
+                                'description' => __('Cycles through all previously uploaded header images one by one. Overwrites all of the above header image settings.', 'wk-wow-child'),
+                                'section' => 'header_image',
+                                'settings' => 'cover_slider_setting',
+                                        'type'    => 'select',
+                                        'choices' => array(
+                                                'yes' => __('Yes', 'wk-wow-child'),
+                                                'no' => __('No', 'wk-wow-child'),
+                                        ),
+                        'priority' => 20,
+                ));
+
+                $wp_customize->add_setting('cover_slider_speed_setting', array(
+                        'default'   => '5',
+                        'type'       => 'theme_mod',
+                        'capability' => 'edit_theme_options',
+                        'sanitize_callback'    => 'absint',
+                        'sanitize_js_callback' => 'absint',
+                ));
+                $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_slider_speed', array(
+                        'label' => __('How many seconds between cycles', 'wk-wow-child'),
+                        'description' => __('(Range between 1 and 10 seconds)', 'wk-wow-child'),
+                        'section'    => 'header_image',
+                        'settings'   => 'cover_slider_speed_setting',
+                        'type' => 'range',
+                        'input_attrs' => array(
+                                'min'  => 1,
+                                'max'  => 10,
+                                'step' => 1,
+                        ),
+                        'priority' => 20,
+                )));
+
+
 		$wp_customize->remove_control('cdn_assets');
 		$wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
 		$wp_customize->get_section('main_color_section')->description = __('These colors overwrite the Theme Option under Preset Styles.', 'wk-wow-child');
@@ -1099,7 +1143,7 @@ if (!function_exists('wkwc_customizer_css')) {
 	  -webkit-transform: scale(1.05) !important;
 	  transform: scale(1.05) !important;
 	}
-	@media (prefers-reduced-motion) {
+	@media (prefers-reduced-motion: reduce) {
 		.single-feature:hover {
 		  -webkit-transform: none !important;
 		  transform: none !important;
