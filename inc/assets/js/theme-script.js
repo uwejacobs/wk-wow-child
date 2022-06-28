@@ -42,7 +42,7 @@ jQuery(document).ready(function($){
 	}
 
     // Pause animation until element is visible
-	$('.animated').animateVisible({tolerance: .5});
+	$('.animated').animateVisible({tolerance: 0});
 	// Show animation for visible element on load
 	$(window).trigger('animateVisibleResizeDone')
 

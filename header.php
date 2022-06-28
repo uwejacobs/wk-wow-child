@@ -144,10 +144,14 @@
 	    <img id="page-sub-header-img" class="jarallax-img" src="<?php header_image(); ?>" />
 <?php if(get_theme_mod('cover_slider_setting') == 'yes') {
 $headers = get_uploaded_header_images();
+error_log(print_r($headers,1));
 $images = [];
+?><div class="d-none"><?php
 foreach($headers as $header) {
     $images[] = "'" . $header["url"] . "'";
+    ?><img src="<?php echo $header["url"];?>" alt="<?php echo $header["alt_text"];?>" /><?php
 }
+?></div><?php
 $interval = get_theme_mod('cover_slider_speed_setting');
 if ($interval < 1 || $interval > 10) {
 	$interval = 5;
@@ -162,8 +166,14 @@ var images = new Array(<?php echo join(',', $images); ?>);
         if (++image_cnt >= images.length) {
             image_cnt = 0;
         }
-
-        document.getElementById("page-sub-header-img").src  = images[image_cnt];
+<?php if (get_theme_mod('cover_slider_fade_setting') == 'no') { ?>
+        jQuery('#page-sub-header-img').attr('src', images[image_cnt]);
+<?php } else { ?>
+        jQuery("#page-sub-header-img").fadeOut("slow", function() {
+            jQuery('#page-sub-header-img').attr('src', images[image_cnt]);
+            jQuery("#page-sub-header-img").fadeIn("slow");
+        });
+<?php } ?>
     }, <?php echo $interval; ?>000);
 });
 </script>
