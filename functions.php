@@ -22,13 +22,13 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     function wkwc_chld_thm_cfg_css_js() {
     if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
         wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css');
-    } else {
+    } else if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
         wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
     }
     if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
-        wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
         wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
     }
+    wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
 
     // force child theme style.css after bootstrap reload
     wp_dequeue_style('wk-wow-style');
@@ -43,8 +43,6 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
 
     wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
     wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
-    wp_enqueue_script('wk-wow-cycle2-child', get_stylesheet_directory_uri() . '/inc/assets/js/cycle2.min.js', array("jquery"), '', true);
-    wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child", "wk-wow-cycle2-child"), '', true);
     wp_add_inline_script('wk-wow-themejs-child', 'const WKWC_options = ' . json_encode(array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'coverImageAni' => get_theme_mod('cover_image_ani', 'none'),
@@ -106,6 +104,30 @@ if (!function_exists('wk_wow_child_password_form')) {
 
 if (!function_exists('wkwc_customize_register_child')) {
     function wkwc_customize_register_child($wp_customize) {
+        if (class_exists("WP_Customize_Control") && !class_exists("ThemeName_Customize_Misc_Control")):
+            class ThemeName_Customize_Misc_Control extends WP_Customize_Control {
+                public $settings = "blogname";
+                public $description = "";
+
+                public function render_content() {
+                    switch ($this->type) {
+                        default:
+                        case "text":
+                            echo '<p class="description customize-control-description">' . esc_html($this->description) . '</p>';
+                            break;
+
+                        case "heading":
+                            echo '<span class="customize-control-title">' . esc_html($this->label) . '</span>';
+                            break;
+
+                        case "line":
+                            echo '<hr />';
+                            break;
+                    }
+                }
+            }
+        endif;
+
         /*API keys*/
         $wp_customize->add_section(
             'api_keys',
@@ -226,7 +248,7 @@ if (!function_exists('wkwc_customize_register_child')) {
 
         /*Bootstrap*/
         $wp_customize->add_setting('load_bootstrap_setting', array(
-            'default' => __('yes','wk-wow-child'),
+            'default' => 'yes',
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
@@ -246,7 +268,7 @@ if (!function_exists('wkwc_customize_register_child')) {
 
         /*FontAwesome*/
         $wp_customize->add_setting('load_fontawesome_setting', array(
-            'default' => __('no','wk-wow-child'),
+            'default' => 'no',
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
@@ -778,7 +800,7 @@ if (!function_exists('wkwc_customize_register_child')) {
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
         ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'theme_option_setting', array(
+        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'theme_option', array(
             'label' => __( 'Theme Option', 'wk-wow-child' ),
             'description' => __('Check all settings in the Colors section.', 'wk-wow-child'),
             'section'    => 'typography',
@@ -908,7 +930,7 @@ if (!function_exists('wkwc_customize_register_child')) {
         ) ) );
 
         $wp_customize->add_setting('feature_hover_scale', array(
-            'default' => __('no','wk-wow-child'),
+            'default' => 'no',
             'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
@@ -961,7 +983,7 @@ if (!function_exists('wkwc_customize_register_child')) {
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
         ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'navbar_color_setting', array(
+        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'navbar_color', array(
             'label' => __( 'Navigation Bar / Copyright Footer Background Color', 'wk-wow-child' ),
             'description' => __('Set to Primary in case the Main Color is the same as the Primary Color.', 'wk-wow-child'),
             'section'    => 'main_color_section',
@@ -982,65 +1004,190 @@ if (!function_exists('wkwc_customize_register_child')) {
 
         ) ) );
 
-        /* Header Image */
-        $wp_customize->add_setting('cover_slider_setting', array(
-                'default' => __('no','wk-wow-child'),
-                'sanitize_callback' => 'sanitize_text_field',
-        ));
+        /* Header Banner */
         $wp_customize->add_control(
-                'cover_slider_setting',
-                array(
-                        'label' => __('Cycle through all uploaded images', 'wk-wow-child'),
-                        'description' => __('Cycles through all previously uploaded header images one by one. Overwrites all of the above header image settings.', 'wk-wow-child'),
-                        'section' => 'header_image',
-                        'settings' => 'cover_slider_setting',
-                                'type'    => 'select',
-                                'choices' => array(
-                                        'yes' => __('Yes', 'wk-wow-child'),
-                                        'no' => __('No', 'wk-wow-child'),
-                                ),
-                'priority' => 20,
-        ));
+            new ThemeName_Customize_Misc_Control(
+                $wp_customize,
+                "wk-wow-child_banner-control-line",
+                [
+                    "section" => "header_image",
+                    "type" => "line",
+                    "priority" => 20,
+                ]
+            )
+        );
+        
+        $wp_customize->add_control(
+            new ThemeName_Customize_Misc_Control(
+                $wp_customize,
+                "wk-wow-child_banner-control-heading",
+                [
+                    "section" => "header_image",
+                    "label" => __("How to display the banner header images", "wk-wow-child"),
+                    "type" => "heading",
+                    "priority" => 21,
+                ]
+            )
+        );
+        
+        $wp_customize->add_control(
+            new ThemeName_Customize_Misc_Control(
+                $wp_customize,
+                "wk-wow-child_banner-control-text",
+                [
+                    "section" => "header_image",
+                    "description" => __("Select the Banner Style first. If you chose one of the slider styles then adjust the slider options as well.", "wk-wow-child"),
+                    "type" => "text",
+                    "priority" => 22,
+                ]
+            )
+        );
+        
+        $wp_customize->add_setting( 'cover_image_setting', array(
+            'default'   => 'image',
+            'type'       => 'theme_mod',
+            'capability' => 'edit_theme_options',
+            'sanitize_callback' => 'wp_filter_nohtml_kses',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'cover_image', array(
+            'label' => __( 'Banner Style', 'wk-wow-child' ),
+            'section'    => 'header_image',
+            'settings'   => 'cover_image_setting',
+            'type'    => 'select',
+            'choices' => array(
+                        'none' => 'Remove Header Banner', // header_banner_visibility
+                        'image' => 'Use the selected uploaded or suggested image',
+                        'slider' => 'Full-screen slider with all uploaded images',
+                        'centered-slider' => 'Centered slider with all uploaded images'),
+            'priority' => 23,
+        ) ) );
 
-        $wp_customize->add_setting('cover_slider_f_setting', array(
-                'default'   => '5',
+        $wp_customize->add_control(
+            new ThemeName_Customize_Misc_Control(
+                $wp_customize,
+                "wk-wow-child_banner-slider-heading",
+                [
+                    "section" => "header_image",
+                    "label" => __("Slider Options", "wk-wow-child"),
+                    "type" => "heading",
+                    "priority" => 30,
+                ]
+            )
+        );
+        
+        $wp_customize->add_setting('cover_slider_speed_setting', array(
+                'default'   => '5000',
                 'type'       => 'theme_mod',
                 'capability' => 'edit_theme_options',
                 'sanitize_callback'    => 'absint',
                 'sanitize_js_callback' => 'absint',
         ));
         $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_slider_speed', array(
-                'label' => __('How many seconds between cycles', 'wk-wow-child'),
-                'description' => __('(Range between 1 and 10 seconds)', 'wk-wow-child'),
+                'label' => __('How many milliseconds between cycles', 'wk-wow-child'),
+                'description' => __('(Range between 1000 and 10000 milliseconds)', 'wk-wow-child'),
                 'section'    => 'header_image',
                 'settings'   => 'cover_slider_speed_setting',
                 'type' => 'range',
                 'input_attrs' => array(
-                        'min'  => 1,
-                        'max'  => 10,
+                        'min'  => 1000,
+                        'max'  => 10000,
                         'step' => 1,
                 ),
-                'priority' => 20,
+                'priority' => 31,
         )));
 
         $wp_customize->add_setting('cover_slider_fade_setting', array(
-                'default' => __('yes','wk-wow-child'),
+                'default' => 'fade',
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_fade_setting',
+                'cover_slider_fade',
                 array(
-                        'label' => __('Fade images in and out while switching', 'wk-wow-child'),
+                        'label' => __('Transition between images', 'wk-wow-child'),
                         'section' => 'header_image',
                         'settings' => 'cover_slider_fade_setting',
                                 'type'    => 'select',
                                 'choices' => array(
-                                        'yes' => __('Yes', 'wk-wow-child'),
-                                        'no' => __('No', 'wk-wow-child'),
+                                        'fade' => __('Fade', 'wk-wow-child'),
+                                        'slide' => __('Slide', 'wk-wow-child'),
                                 ),
-                'priority' => 20,
+                'priority' => 32,
         ));
 
+        $wp_customize->add_setting('cover_slider_caption_setting', array(
+                'default' => 'no',
+                'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control(
+                'cover_slider_caption',
+                array(
+                        'label' => __('Show image captions', 'wk-wow-child'),
+                        'section' => 'header_image',
+                        'settings' => 'cover_slider_caption_setting',
+                                'type'    => 'select',
+                                'choices' => array(
+                                        'no' => __('No', 'wk-wow-child'),
+                                        'yes' => __('Yes', 'wk-wow-child'),
+                                ),
+                'priority' => 33,
+        ));
+
+        $wp_customize->add_setting('cover_slider_control_setting', array(
+                'default' => 'yes',
+                'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control(
+                'cover_slider_control',
+                array(
+                        'label' => __('Show slider controls', 'wk-wow-child'),
+                        'section' => 'header_image',
+                        'settings' => 'cover_slider_control_setting',
+                                'type'    => 'select',
+                                'choices' => array(
+                                        'no' => __('No', 'wk-wow-child'),
+                                        'yes' => __('Yes', 'wk-wow-child'),
+                                ),
+                'priority' => 34,
+        ));
+
+        $wp_customize->add_setting('cover_slider_indicator_setting', array(
+                'default' => 'yes',
+                'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control(
+                'cover_slider_indicator',
+                array(
+                        'label' => __('Show slider indicators', 'wk-wow-child'),
+                        'section' => 'header_image',
+                        'settings' => 'cover_slider_indicator_setting',
+                                'type'    => 'select',
+                                'choices' => array(
+                                        'no' => __('No', 'wk-wow-child'),
+                                        'yes' => __('Yes', 'wk-wow-child'),
+                                ),
+                'priority' => 35,
+        ));
+
+        $wp_customize->add_setting('cover_slider_dark_setting', array(
+                'default' => 'yes',
+                'sanitize_callback' => 'sanitize_text_field',
+        ));
+        $wp_customize->add_control(
+                'cover_slider_dark',
+                array(
+                        'label' => __('Show dark slider controls and indicators', 'wk-wow-child'),
+                        'description' => __('Set this to Yes if your theme setting has a light background color.', 'wk-wow-child'),
+                        'section' => 'header_image',
+                        'settings' => 'cover_slider_dark_setting',
+                                'type'    => 'select',
+                                'choices' => array(
+                                        'no' => __('No', 'wk-wow-child'),
+                                        'yes' => __('Yes', 'wk-wow-child'),
+                                ),
+                'priority' => 36,
+        ));
+
+        $wp_customize->remove_control('header_banner_visibility');
         $wp_customize->remove_control('cdn_assets');
         $wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
         $wp_customize->get_section('main_color_section')->description = __('These colors overwrite the Theme Option under Preset Styles.', 'wk-wow-child');

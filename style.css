@@ -6,7 +6,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.2.2
+Version: 1.2.3
 Requires at least: 5.0
 Tested up to: 5.9.3
 Requires PHP: 7.0
@@ -771,13 +771,6 @@ Text Domain: wk-wow-child
 	 -webkit-animation-name: slideIn;
 	 animation-name: slideIn;
 }
- @media(max-width: 991.98px) {
-	 .page-sub-header {
-		 padding-top: 10rem!important;
-		 padding-bottom: 0!important;
-		 height: auto!important;
-	}
-}
  #comments #respond form {
 	 background-color: #fffdfd;
 	 padding: 20px 30px;
@@ -1246,6 +1239,7 @@ Text Domain: wk-wow-child
   margin-bottom: 50px;
   box-shadow: 0px 5px 25px rgba(218, 211, 211, 0.3);
   text-align: center;
+  height: 90%;
 }
  .single-features-1 .single-feature .image {
   text-align: center;
@@ -1257,13 +1251,13 @@ Text Domain: wk-wow-child
   margin-bottom: 40px;
   margin-top: 30px;
   box-shadow: 0px 5px 25px rgba(218, 211, 211, 0.3);
+  height: 80%;
 }
 .single-features-2 .single-feature .icon {
   width: 72px;
   height: 72px;
   border-radius: 50%;
   background: #2F80ED;
-  color: #ffffff;
   font-size: 35px;
   display: flex;
   justify-content: center;
@@ -1275,11 +1269,11 @@ Text Domain: wk-wow-child
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 3rem;
-  width: 3rem;
-  font-size: 1.5rem;
+  height: 4rem;
+  width: 4rem;
+  font-size: 2.5rem;
   position: relative;
-  top: -2.5rem;
+  top: -3rem;
 }
  .single-features-3 div.single-feature {
   margin-bottom: 5.5rem !important;
@@ -1306,4 +1300,27 @@ Text Domain: wk-wow-child
   width: 100%;
   height: 100%;
   z-index: -1;
+}
+/** =========================================================== Centered Header Banner Slider ================================================================= */
+.page-sub-header.page-sub-header-centered-slider {
+  padding-top: 3rem!important;
+}
+.page-sub-header-centered-slider #content.site-content {
+  padding-top: 0;
+}
+.slider-element {
+  position: relative;
+}
+.slider-element > * {
+  position: relative;
+}
+.slider-element .wp-block-image img {
+  height: auto;
+}
+.page-sub-header-centered-slider figcaption {
+  background-color: black;
+  color: white;
+  font-style: italic;
+  padding: 2px;
+  text-align: center;
 }

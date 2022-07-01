@@ -20,7 +20,7 @@ function wk_wow_child_custom_header_setup() {
 	remove_theme_support( 'custom-header' );
 
 	add_theme_support( 'custom-header', apply_filters( 'wk_wow_custom_header_args', array(
-		'default-image'          => get_template_directory_uri() . '/inc/assets/images/default-cover-img.jpg',
+		'default-image'          => get_stylesheet_directory_uri() . '/inc/assets/images/default-cover-img.jpg',
 		'default-text-color'     => '000',
 		'width'                  => 1920,
 		'height'                 => 1080,
@@ -31,9 +31,9 @@ function wk_wow_child_custom_header_setup() {
 
 	register_default_headers( array(
                 'desk' => array(
-                        'url'           => '%s/inc/assets/images/default-cover-img.jpg',
-                        'thumbnail_url' => '%s/inc/assets/images/default-cover-img.jpg',
-                        'description'   => __( 'Desk', 'wk-wow' )
+                        'url'           => get_stylesheet_directory_uri() . '/inc/assets/images/default-cover-img.jpg',
+                        'thumbnail_url' => get_stylesheet_directory_uri() . '/inc/assets/images/default-cover-img.jpg',
+                        'description'   => __( 'Desk', 'wk-wow-child' )
                 ),
         ) );
 

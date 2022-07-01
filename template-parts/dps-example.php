@@ -22,11 +22,11 @@
         if ( is_single() ) :
 			the_content();
         else :
-            the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'wk-wow' ) );
+            the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'wk-wow-child' ) );
         endif;
 
 			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wk-wow' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wk-wow-child' ),
 				'after'  => '</div>',
 			) );
 		?>
