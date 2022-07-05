@@ -38,11 +38,12 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     wp_enqueue_style( 'wk-wow-child-style', get_stylesheet_uri() );
 
     if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        wp_enqueue_style('wk-wow--child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
+        wp_enqueue_style('wk-wow-child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
     }
 
     wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
     wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
+    wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child"), '', true);
     wp_add_inline_script('wk-wow-themejs-child', 'const WKWC_options = ' . json_encode(array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'coverImageAni' => get_theme_mod('cover_image_ani', 'none'),
@@ -335,7 +336,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'topbar_button_slug',
                 array(
                         'type'     => 'text',
-                        'label'    => esc_html__( 'Topbar Button Slug:', 'wk-wow-child' ),
+                        'label'    => esc_html__( 'Topbar Button Slug and Id:', 'wk-wow-child' ),
+            		'description' => __('1. #id (homepage); 2. slug; 3. slug#id..', 'wk-wow-child'),
                         'section'  => 'site_name_text_color',
                 'settings' => 'topbar_button_slug_setting',
                         'priority' => 30,
