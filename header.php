@@ -151,8 +151,13 @@
           } else if(get_theme_mod('cover_image_setting', 'none') == 'centered-slider') {
               include dirname( __FILE__ ) . '/inc/header-slider-centered.php';
               $print_title_tagline = false;
-          } else /*single image */ { ?>
-              <img id="page-sub-header-img" class="jarallax-img" src="<?php header_image(); ?>" />
+	  } else { /*single image */ 
+              $imgData = get_object_vars(get_theme_mod('header_image_data'));
+              $attachment_id = is_array($imgData) && isset($imgData['attachment_id']) ? $imgData['attachment_id'] : false;
+              if($attachment_id) {
+                   $headerAlt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+              } ?>
+	  <img id="page-sub-header-img" class="jarallax-img" src="<?php header_image(); ?>" alt="<?php echo esc_attr(empty($headerAlt) ? esc_url(bloginfo('name')) . " Cover Image" : $headerAlt); ?>" />
 <?php     }
       }
       if ($print_title_tagline) { ?>
