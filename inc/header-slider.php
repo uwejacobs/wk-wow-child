@@ -16,7 +16,7 @@ foreach($headers as $header) {
 }
 ?>
 </div>
-<img id="page-sub-header-img" class="jarallax-img" src="<?php echo str_replace("'", "", $images[0]); ?>" />
+<img id="page-sub-header-img" class="jarallax-img" src="<?php echo str_replace("'", "", $img_src[0]); ?>" />
 <script>
 window.addEventListener('load', (event) => {
     var images = new Array(<?php echo join(',', $img_src); ?>);
