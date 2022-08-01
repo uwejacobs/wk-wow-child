@@ -146,19 +146,14 @@
     <div id="page-sub-header" class="page-sub-header jarallax page-sub-header-<?php echo get_theme_mod('cover_image_setting', 'none'); ?>">
 <?php $print_title_tagline = true;
       if(has_header_image()) {
-          if(get_theme_mod('cover_image_setting', 'none') == 'slider') {
+          if (get_theme_mod('cover_image_setting', 'none') == 'slider') {
               include dirname( __FILE__ ) . '/inc/header-slider.php';
           } else if(get_theme_mod('cover_image_setting', 'none') == 'centered-slider') {
               include dirname( __FILE__ ) . '/inc/header-slider-centered.php';
               $print_title_tagline = false;
-	  } else { /*single image */ 
-              $imgData = get_object_vars(get_theme_mod('header_image_data'));
-              $attachment_id = is_array($imgData) && isset($imgData['attachment_id']) ? $imgData['attachment_id'] : false;
-              if($attachment_id) {
-                   $headerAlt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
-              } ?>
-	  <img id="page-sub-header-img" class="jarallax-img" src="<?php header_image(); ?>" alt="<?php echo esc_attr(empty($headerAlt) ? esc_url(bloginfo('name')) . " Cover Image" : $headerAlt); ?>" />
-<?php     }
+	      } else { /*single image */ 
+              echo wkwc_create_responsive_image( get_header_image(), "page-sub-header-img", "jarallax-img" );
+          }
       }
       if ($print_title_tagline) { ?>
             <div class="container">

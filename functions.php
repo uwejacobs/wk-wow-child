@@ -1435,3 +1435,13 @@ if (!function_exists('wk_wow_child_body_classes')) {
 
     add_filter( 'body_class', 'wk_wow_child_body_classes' );
 }
+
+if (!function_exists('wkwc_create_responsive_image')) {
+    function wkwc_create_responsive_image( $img, $id = null, $class = null ) {
+        $img_id = attachment_url_to_postid( $img );
+        $img_srcset = wp_get_attachment_image_srcset( $img_id );
+        $img_sizes = wp_get_attachment_image_sizes( $img_id );
+        $img_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
+        return '<img ' . ($id ? 'id="' . esc_attr( $id ) . '" ' : '') . ($class ? 'class="' . esc_attr( $class ) . '" ' : '') . 'src="' . $img . '" srcset="' . esc_attr( $img_srcset ) . '" sizes="' . esc_attr( $img_sizes ) . '" alt="' . esc_attr( $img_alt ) . '">';
+    }
+}
