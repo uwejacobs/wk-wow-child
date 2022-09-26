@@ -9,7 +9,26 @@
  * @package WK_Wow
  */
 
-?><!DOCTYPE html>
+function printTagline() {?>
+<div class="container">
+    <p id="header-banner-title" class="header-banner-title">
+        <?php
+        if(get_theme_mod( 'header_banner_title_setting' )){
+            echo esc_html(get_theme_mod( 'header_banner_title_setting' ));
+        }
+        ?>
+    </p>
+    <p id="header-banner-tagline" class="header-banner-tagline">
+        <?php
+        if(get_theme_mod( 'header_banner_tagline_setting' )){
+            echo esc_html(get_theme_mod( 'header_banner_tagline_setting' ));
+      }
+        ?>
+    </p>
+    <a href="#content" class="page-scroller btn-circle"><i class="fa fa-fw fa-arrow-down"></i><span class="sr-only"><?php esc_html_e( 'Skip to content', 'wk-wow-child' ); ?></span></a>
+</div>
+<?php } ?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -142,7 +161,12 @@
 
         </div>
     </header><!-- #masthead -->
-    <?php if(is_front_page() && get_theme_mod('cover_image_setting', 'none') != 'none'): ?>
+    <?php if (is_front_page() && !empty(get_theme_mod('cover_yt_video_setting', ''))) { ?>
+            <div id="page-sub-header" class="page-sub-header page-sub-header-yt-video page-sub-header-<?php echo get_theme_mod('cover_yt_video_setting', 'none'); ?>">
+            <?php include dirname( __FILE__ ) . '/inc/header-video.php';
+                  printTagline(); ?>
+            </div>
+    <?php } else if (is_front_page() && get_theme_mod('cover_image_setting', 'none') != 'none') { ?>
     <div id="page-sub-header" class="page-sub-header jarallax page-sub-header-<?php echo get_theme_mod('cover_image_setting', 'none'); ?>">
 <?php $print_title_tagline = true;
       if(has_header_image()) {
@@ -155,27 +179,11 @@
               echo wkwc_create_responsive_image( get_header_image(), "page-sub-header-img", "jarallax-img" );
           }
       }
-      if ($print_title_tagline) { ?>
-            <div class="container">
-                <p id="header-banner-title" class="header-banner-title">
-                    <?php
-                    if(get_theme_mod( 'header_banner_title_setting' )){
-                        echo esc_html(get_theme_mod( 'header_banner_title_setting' ));
-                    }
-                    ?>
-                </p>
-                <p id="header-banner-tagline" class="header-banner-tagline">
-                    <?php
-                    if(get_theme_mod( 'header_banner_tagline_setting' )){
-                        echo esc_html(get_theme_mod( 'header_banner_tagline_setting' ));
-                  }
-                    ?>
-                </p>
-                <a href="#content" class="page-scroller btn-circle"><i class="fa fa-fw fa-arrow-down"></i><span class="sr-only"><?php esc_html_e( 'Skip to content', 'wk-wow-child' ); ?></span></a>
-            </div>
-      <?php } ?>
+      if ($print_title_tagline) {
+        printTagline();
+      } ?>
         </div>
-    <?php endif; ?>
+    <?php } ?>
     <div id="content" class="site-content">
         <div class="container">
             <div class="row">

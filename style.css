@@ -2,14 +2,15 @@
 Theme Name: WK Wow Child
 Theme URI: https://web-komp.eu/theme/wow
 GitHub Theme URI: https://github.com/uwejacobs/wk-wow-child
+Primary Branch: main
 Template: wk-wow
 Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.4.0
+Version: 1.4.1
 Requires at least: 5.0
-Tested up to: 5.9.3
+Tested up to: 6.0.2
 Requires PHP: 7.0
 Text Domain: wk-wow-child
 */
@@ -206,9 +207,8 @@ Text Domain: wk-wow-child
 /*-------------------------------------------------------------- # page-sub-header --------------------------------------------------------------*/
  @media(max-width:  991.98px) {
  .page-sub-header {
-  padding-top: 10rem!important;
-  padding-bottom: 0rem!important;
-  height: auto!important;
+         padding-top: 10rem!important;
+         padding-bottom: 0rem!important;
   }
 }
  .page-sub-header {

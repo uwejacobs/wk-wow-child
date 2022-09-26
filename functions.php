@@ -1189,6 +1189,40 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'priority' => 36,
         ));
 
+        $wp_customize->add_setting('cover_yt_video_setting', array(
+            'default'   => '',
+            'type'       => 'theme_mod',
+            'capability' => 'edit_theme_options',
+            'sanitize_callback' => 'wp_filter_nohtml_kses',
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_yt_video', array(
+            'label' => __('YouTube Cover Video Id', 'wk-wow-child'),
+            'section'    => 'header_image',
+            'settings'   => 'cover_yt_video_setting',
+            'type' => 'text',
+            'priority' => 50,
+        )));
+        
+        $wp_customize->add_setting('cover_yt_video_opacity_setting', array(
+                'default'   => '0.5',
+                'type'       => 'theme_mod',
+                'capability' => 'edit_theme_options',
+                'sanitize_callback'    => '',
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_slider_speed', array(
+                'label' => __('YouTube Cover Video Opacity', 'wk-wow-child'),
+                'description' => __('(Range between 0.1 and 1)', 'wk-wow-child'),
+                'section'    => 'header_image',
+                'settings'   => 'cover_yt_video_opacity_setting',
+                'type' => 'range',
+                'input_attrs' => array(
+                        'min'  => 0.1,
+                        'max'  => 1,
+                        'step' => 0.1,
+                ),
+                'priority' => 51,
+        )));
+        
         $wp_customize->remove_control('header_banner_visibility');
         $wp_customize->remove_control('cdn_assets');
         $wp_customize->get_control('preset_style_setting')->description = __('Most Theme Options, other than Default, overwrite the Typography.', 'wk-wow-child');
@@ -1299,7 +1333,8 @@ if (!function_exists('wkwc_customizer_css')) {
     .woocommerce.widget_shopping_cart .buttons a,
     .woocommerce #respond input#submit:hover,
     .woocommerce button.button:hover,
-    .woocommerce input.button:hover {
+    .woocommerce input.button:hover,
+    .feature.video {
       background-color: <?php echo esc_html($main_color);?>;
     }
 
