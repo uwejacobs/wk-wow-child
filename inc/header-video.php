@@ -1,12 +1,12 @@
 <?php ?>
 <div class="feature video">
-  <div class="video-bg">
+  <div id="video-bg" class="video-bg">
     <?php $video_id = get_theme_mod('cover_yt_video_setting'); ?>
     <div id="video" class="animate video-wrapper">
       <div id="player"></div>
         <script type="text/javascript">
           var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-          if ( viewportWidth > 1024 || !'ontouchstart' in window || !navigator.maxTouchPoints){
+          if (viewportWidth > 1024 || !'ontouchstart' in window || !navigator.maxTouchPoints){
             var tag = document.createElement('script');
             tag.src = "https://www.youtube.com/iframe_api";
             var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -51,6 +51,8 @@
                 player.mute();
               }
             }
+        } else {
+            document.getElementById("video-bg").style.backgroundImage = 'url("https://img.youtube.com/vi/<?php echo $video_id; ?>/maxresdefault.jpg")';
         }
         </script>
     </div>
@@ -58,11 +60,12 @@
 </div>
 
 <style type="text/css">
-.feature.video, .video-bg {
+.feature.video, .feature .video-bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .feature.video {
   position: absolute;
   top: 0;
@@ -74,7 +77,8 @@
   z-index: -1;
   overflow: hidden;
 }
-.video-wrapper {
+
+.feature .video-wrapper {
   overflow: hidden;
   position: absolute;
   top: 50%;
@@ -90,7 +94,8 @@
         if ($video_opacity < 0.1 || $video_opacity > 1.0) $video_opacity = 0.5; ?>
   opacity: <?php echo $video_opacity; ?>;
 }
-.video-wrapper iframe {
+
+.feature .video-wrapper iframe {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -100,20 +105,8 @@
   pointer-events: none;
 }
 
-.video-bg {
+.feature .video-bg {
   height: 100%;
-}
-
-@media (max-width: 1024px) {
-  .video-bg:before {
-    content: "";
-    background-color: <?php echo get_theme_mod('main_color', '#000'); ?>;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 </style>
 <script type="text/javascript">

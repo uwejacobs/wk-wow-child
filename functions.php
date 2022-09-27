@@ -1333,8 +1333,7 @@ if (!function_exists('wkwc_customizer_css')) {
     .woocommerce.widget_shopping_cart .buttons a,
     .woocommerce #respond input#submit:hover,
     .woocommerce button.button:hover,
-    .woocommerce input.button:hover,
-    .feature.video {
+    .woocommerce input.button:hover {
       background-color: <?php echo esc_html($main_color);?>;
     }
 
