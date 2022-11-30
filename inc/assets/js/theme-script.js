@@ -2,6 +2,9 @@ jQuery(document).ready(function($){
     //'use strict';
 
 //console.log(WKWC_options);
+	// WPCF7 Star Rating
+	$(".wpcf7-form-control.wpcf7-uacf7_star_rating").removeClass("form-control");
+
 	// MailPoet
 	$(".mailpoet_form_columns").addClass("form-inline");
 	$(".mailpoet_form_columns input").addClass("form-control");
