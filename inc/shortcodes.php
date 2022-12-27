@@ -560,7 +560,7 @@ if (!function_exists('ujcfe_formatEmail')) {
 if (!function_exists('ujcfe_formatPhone')) {
 	function ujcfe_formatPhone($phone) {
 		if (!empty($phone)) {
-			return '<i class="fas fa-mobile-alt fa-fw me-2"></i><a href="tel:' . esc_attr(preg_replace('/[^0-9]/', '', $phone)) . '">'. esc_html($phone). '</a>';
+			return '<i class="fas fa-mobile-alt fa-fw me-2"></i><a href="tel:' . esc_attr(antispambot(preg_replace('/[^0-9]/', '', $phone))) . '">'. esc_html(antispambot($phone)) . '</a>';
 		}
 		
 		return '';
