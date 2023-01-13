@@ -21,7 +21,7 @@ if (!function_exists('wkwc_generateColorCSS')) {
 		$t8 = wkwc_hsl2hex(array($hsl[0], $hsl[1], wkwc_hslAddition($hsl[2], -0.34)));
 		$t9 = wkwc_hsl2hex(array($hsl[0], $hsl[1], wkwc_hslAddition($hsl[2],  0.40)));
 		$shadow = '0 0 0 0.2rem rgba(' . $rgb[0] . ', ' . $rgb[1] . ', ' . $rgb[2] . ', 0.5)';
-		$wkwc_isDark = wkwc_isDark($rgb);
+		$isDark = wkwc_isDark($rgb);
 		$s = [];
 		
 		//----------------------------------------
@@ -113,7 +113,7 @@ if (!function_exists('wkwc_generateColorCSS')) {
 		//----------------------------------------
 		// dark/light
 		//----------------------------------------
-		$textColor = $wkwc_isDark ? '#212529' : '#fff';
+		$textColor = $isDark ? '#212529' : '#fff';
 		wkwc_addStylesheetRule($s, ".badge-".$name, "color", $textColor);
 		wkwc_addStylesheetRule($s, ".badge-".$name."[href]:hover, .badge-".$name."[href]:focus", "color", $textColor);
 		wkwc_addStylesheetRule($s, ".btn-".$name, "color", $textColor);

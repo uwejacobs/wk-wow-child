@@ -1392,7 +1392,24 @@ if (!function_exists('wkwc_customizer_css')) {
     <?php
         require_once dirname( __FILE__ ) . '/inc/color-css.php';
         echo wkwc_generateColorCSS(get_theme_mod('main_color'), "main");
+        $isDark = wkwc_isDark(wkwc_hex2rgb($main_color));
+        $text_color = $isDark ? '#212529' : '#fff';
     ?>
+
+    .nk-awb p,
+    .nk-awb h2,
+    .nk-awb h3,
+    .nk-awb h4,
+    .nk-awb h5,
+    .nk-awb h6 {
+      background-color: <?php echo esc_html($main_color) ?>;
+      color: <?php echo esc_html($text_color) ?>;
+      display: inline-block;
+      padding: 17px 20px;
+      font-size: 2em;
+      font-weight: 700;
+      line-height: 1.05em;
+    }
     </style>
     <?php
     }
