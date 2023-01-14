@@ -1396,6 +1396,7 @@ if (!function_exists('wkwc_customizer_css')) {
         $text_color = $isDark ? '#212529' : '#fff';
     ?>
 
+    #page-banner-title,
     .nk-awb p,
     .nk-awb h2,
     .nk-awb h3,
@@ -1404,11 +1405,6 @@ if (!function_exists('wkwc_customizer_css')) {
     .nk-awb h6 {
       background-color: <?php echo esc_html($main_color) ?>;
       color: <?php echo esc_html($text_color) ?>;
-      display: inline-block;
-      padding: 17px 20px;
-      font-size: 2em;
-      font-weight: 700;
-      line-height: 1.05em;
     }
     </style>
     <?php
@@ -1491,8 +1487,21 @@ if (!function_exists('wkwc_create_responsive_image')) {
     function wkwc_create_responsive_image( $img, $id = null, $class = null ) {
         $img_id = attachment_url_to_postid( $img );
         $img_srcset = wp_get_attachment_image_srcset( $img_id );
-        $img_sizes = wp_get_attachment_image_sizes( $img_id );
+        $img_sizes = wp_get_attachment_image_sizes($img_id, 'full');
         $img_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
         return '<img ' . ($id ? 'id="' . esc_attr( $id ) . '" ' : '') . ($class ? 'class="' . esc_attr( $class ) . '" ' : '') . 'src="' . $img . '" srcset="' . esc_attr( $img_srcset ) . '" sizes="' . esc_attr( $img_sizes ) . '" alt="' . esc_attr( $img_alt ) . '">';
     }
+}
+
+if (!function_exists('wkwc_body_open')) {
+    function wkwc_body_open() {
+	    if (is_front_page())  return;
+	    if (!has_post_thumbnail(get_the_ID())) return;
+?>
+<div id="page-banner" style="background: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>')">
+    <h1 id="page-banner-title" aria-current="page"><?php the_title(); ?></h1>
+</div>
+<?php
+    }
+    add_action( 'wp_body_open', 'wkwc_body_open', 1 );
 }

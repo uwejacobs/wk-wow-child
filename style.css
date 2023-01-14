@@ -8,7 +8,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.4.6
+Version: 1.5.0
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.0
@@ -662,6 +662,7 @@ Text Domain: wk-wow-child
  #masthead{
 	 margin-bottom: 0;
 	 position: fixed;
+	 top: 0;
 	 right: 0;
 	 left: 0;
 	 z-index: 1030;
@@ -789,7 +790,8 @@ Text Domain: wk-wow-child
 }
  #content.site-content {
 	 padding-bottom: 3.75rem;
-	 padding-top: 9.125rem;
+/*	 padding-top: 9.125rem; */
+	 padding-top: 3.75rem; 
 	 overflow: hidden;
 }
  a.page-scroller {
@@ -955,32 +957,8 @@ Text Domain: wk-wow-child
 	 text-transform: capitalize;
 }
 /*---------------------------------- Breadcrumbs Yoast ----------------------------------*/
- #breadcrumbs {
-	 position: relative;
-	 display: table;
-	 width: 100%;
-	 text-align: center;
-	 padding: 150px 0 130px 0;
-	 background-position: center top;
-	 background-size: cover;
-	 background-image: url(inc/assets/images/breadcrumb.jpg) 
-}
  .home #breadcrumbs {
 	 display: none;
-}
- #breadcrumbs{
-	 text-align: center;
-	 font-size: 42px;
-	 line-height: 50px;
-	 font-weight: 600;
-	 color: #fff;
-	 text-shadow: 4px 5px 5px rgba(0,0,0,0.2);
-}
- @media only screen and (max-width: 767.98px){
-	 #breadcrumbs {
-		 font-size: 30px;
-		 line-height: 40px;
-	}
 }
 /*---------------------------------- services ----------------------------------*/
  .section-title {
@@ -1324,4 +1302,51 @@ Text Domain: wk-wow-child
   font-style: italic;
   padding: 2px;
   text-align: center;
+}
+
+
+
+#page-banner-title,
+.nk-awb p,
+.nk-awb h2,
+.nk-awb h3,
+.nk-awb h4,
+.nk-awb h5,
+.nk-awb h6 {
+  display: inline-block;
+  padding: 17px 20px;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.05em;
+}
+
+@media only screen and (max-width: 767.98px){
+  #page-banner-title,
+  .nk-awb p,
+  .nk-awb h2,
+  .nk-awb h3,
+  .nk-awb h4,
+  .nk-awb h5,
+  .nk-awb h6 {
+    font-size: 1.75em;
+  }
+}
+
+#page-banner {
+  position: relative;
+  padding: 150px 0 130px 0;
+  margin: 0 auto;
+  max-width: 1700px;
+  max-height: 400px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+#page-banner-title {
+  position: relative;
+  margin-left: 15%;
+  margin-bottom: -15%;
+  margin-top: 0;
+  margin-right: 0;
 }

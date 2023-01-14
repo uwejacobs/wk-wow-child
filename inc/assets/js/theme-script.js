@@ -78,6 +78,14 @@ jQuery(document).ready(function($){
           }
         }
     });
+
+    $("#masthead").css("top", $("#wpadminbar").height() ?? 0);
+    $("#page-banner").css("top", $("#masthead").height() ?? 0);
+
+    $(window).on('resize', function(){
+        $("#masthead").css("top", $("#wpadminbar").height() ?? 0);
+        $("#page-banner").css("top", $("#masthead").height() ?? 0);
+    });
 	
 	$(window).scroll(function () {
 		var top = $(document).scrollTop();
