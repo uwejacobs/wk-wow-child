@@ -81,11 +81,9 @@ jQuery(document).ready(function($){
 
     if ($('#wpadminbar').length) {
         $("#masthead").css("top", $("#wpadminbar").height() ?? 0);
-        $("#page-banner").css("top", $("#masthead").height() ?? 0);
 
         $(window).on('resize', function(){
             $("#masthead").css("top", $("#wpadminbar").height() ?? 0);
-            $("#page-banner").css("top", $("#masthead").height() ?? 0);
         });
     }
 	
