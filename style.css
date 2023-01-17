@@ -8,7 +8,7 @@ Author: Uwe Jacobs
 Author URI:
 Description: WK Wow Child extends the WK Wow theme. Wk Wow is a beautiful, attractive, and free WordPress theme. You can use this theme for all kinds of personal and professional blogging websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is compatible with Elementor; you can use its drag &amp; drop functionality to design your pages. This theme is also compatible with WooCommerce and Contact Form 7.
 Tags: blog,custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, full-width-template, bootstrap, bootstrap5, responsive, animated
-Version: 1.5.2
+Version: 1.5.3
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.0
@@ -789,9 +789,15 @@ Text Domain: wk-wow-child
 	 font-size: 0.7888em 
 }
  #content.site-content {
-	 padding-bottom: 3.75rem;
-	 padding-top: 5.75rem; 
+	 padding-bottom: 3.75rem; 
+	 padding-top: 2rem;
 	 overflow: hidden;
+}
+ .has-page-banner #content.site-content {
+	 padding-top: 2rem;
+}
+ .no-page-banner #content.site-content {
+	 padding-top: 3.75rem;
 }
  a.page-scroller {
 	 color: #fff;
@@ -958,6 +964,12 @@ Text Domain: wk-wow-child
 /*---------------------------------- Breadcrumbs Yoast ----------------------------------*/
  .home #breadcrumbs {
 	 display: none;
+}
+ #breadcrumbs {
+    padding: 10px 15px;
+    border: 1px solid;
+    width: fit-content;
+    border-radius: 5px;
 }
 /*---------------------------------- services ----------------------------------*/
  .section-title {
@@ -1257,7 +1269,7 @@ Text Domain: wk-wow-child
   top: -3rem;
 }
  .single-features-3 div.single-feature {
-  margin-bottom: 5.5rem !important;
+  margin-top: 5.5rem !important;
 }
  .mb-25 {
   margin-bottom: 25px;
@@ -1338,7 +1350,6 @@ Text Domain: wk-wow-child
   position: relative;
   padding: 250px 0 150px 0;
   margin: 0 auto;
-  margin-top: 4rem;
   max-width: 1700px;
   max-height: 400px;
   background-position: center center;

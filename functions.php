@@ -1475,7 +1475,13 @@ if (!function_exists('wk_wow_child_body_classes')) {
         $color = get_theme_mod('header_bg_color_setting');
             if ($color && $color !== '#000' && $color !== '#000000') {
                 $classes[] = 'header-background-color';
-            }
+	    }
+
+	if (!is_front_page() && has_post_thumbnail(get_the_ID())) {
+                $classes[] = 'has-page-banner';
+	} else {
+                $classes[] = 'no-page-banner';
+	}
 
             return $classes;
     }
@@ -1493,8 +1499,8 @@ if (!function_exists('wkwc_create_responsive_image')) {
     }
 }
 
-if (!function_exists('wkwc_body_open')) {
-    function wkwc_body_open() {
+if (!function_exists('wkwc_page_header_banner')) {
+    function wkwc_page_header_banner() {
 	    if (is_front_page())  return;
 	    if (!has_post_thumbnail(get_the_ID())) return;
 ?>
@@ -1503,5 +1509,12 @@ if (!function_exists('wkwc_body_open')) {
 </div>
 <?php
     }
-    add_action( 'wp_body_open', 'wkwc_body_open', 1 );
+    add_action( 'wkwc_page_header_banner', 'wkwc_page_header_banner', 1 );
+}
+
+if (!function_exists('wkwc_breadcrumbs')) {
+    function wkwc_breadcrumbs() {
+        if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb( '<p id="breadcrumbs">','</p>' ); }
+    }
+    add_action( 'wkwc_breadcrumbs', 'wkwc_breadcrumbs', 1 );
 }

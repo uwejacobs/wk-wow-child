@@ -137,7 +137,7 @@ function printTagline() {?>
                 </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
-                <?php
+<?php
                 wp_nav_menu(array(
             'theme_location'  => 'primary',
             'container' => false,
@@ -148,7 +148,7 @@ function printTagline() {?>
             'walker' => new bootstrap_5_wp_nav_menu_walker()
                 ));
         if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-            <a id="topbar-button-toggler" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none d-block"><?php echo esc_html($wk_wow_child_button); ?></a>
+            <a id="topbar-button-toggler" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none"><?php echo esc_html($wk_wow_child_button); ?></a>
                 <?php }
                 ?>
         </div>
@@ -161,7 +161,8 @@ function printTagline() {?>
 
         </div>
     </header><!-- #masthead -->
-    <?php if (is_front_page() && !empty(get_theme_mod('cover_yt_video_setting', ''))) { ?>
+    <?php do_action( 'wkwc_page_header_banner' );
+          if (is_front_page() && !empty(get_theme_mod('cover_yt_video_setting', ''))) { ?>
             <div id="page-sub-header" class="page-sub-header page-sub-header-yt-video page-sub-header-<?php echo get_theme_mod('cover_yt_video_setting', 'none'); ?>">
             <?php include dirname( __FILE__ ) . '/inc/header-video.php';
                   printTagline(); ?>
