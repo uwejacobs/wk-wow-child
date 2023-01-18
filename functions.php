@@ -1483,6 +1483,10 @@ if (!function_exists('wk_wow_child_body_classes')) {
                 $classes[] = 'no-page-banner';
 	}
 
+	if (!is_front_page() && function_exists('yoast_breadcrumb') && !empty(yoast_breadcrumb('', '', false))) {
+                $classes[] = 'has-breadcrumbs';
+	}
+
             return $classes;
     }
 
@@ -1514,7 +1518,7 @@ if (!function_exists('wkwc_page_header_banner')) {
 
 if (!function_exists('wkwc_breadcrumbs')) {
     function wkwc_breadcrumbs() {
-        if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb( '<p id="breadcrumbs">','</p>' ); }
+        if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb( '<div class="col-12"><p id="breadcrumbs">','</p></div>' ); }
     }
     add_action( 'wkwc_breadcrumbs', 'wkwc_breadcrumbs', 1 );
 }

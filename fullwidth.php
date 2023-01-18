@@ -3,12 +3,12 @@
 * Template Name: Full Width
  */
 
-get_header(); ?>
+get_header();
+do_action("wkwc_breadcrumbs"); ?>
 
 	<section id="primary" class="content-area col-sm-12">
 		<main id="main" class="site-main" role="main">
 			<?php
-			do_action("wkwc_breadcrumbs");
 			while ( have_posts() ) : the_post();
 
 				get_template_part( 'template-parts/content', 'page' );
