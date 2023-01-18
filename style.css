@@ -799,10 +799,10 @@ Text Domain: wk-wow-child
  .no-page-banner #content.site-content {
 	 padding-top: 6.5rem;
 }
- @media screen and (min-width: 768px) {
-   .no-page-banner #content.site-content {
-	 padding-top: 3.75rem;
-   }
+ @media screen and (min-width: 1200px) {
+  .no-page-banner #content.site-content {
+    padding-top: 4.5rem;
+  }
 }
  a.page-scroller {
 	 color: #fff;
