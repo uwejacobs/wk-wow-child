@@ -148,13 +148,13 @@ function printTagline() {?>
             'walker' => new bootstrap_5_wp_nav_menu_walker()
                 ));
         if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-            <a id="topbar-button-toggler" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-none"><?php echo esc_html($wk_wow_child_button); ?></a>
+            <a id="topbar-button-toggler" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn topbar-button btn-radius d-xl-none"><?php echo esc_html($wk_wow_child_button); ?></a>
                 <?php }
                 ?>
         </div>
                 <?php
                 if (!empty($wk_wow_child_button) && !empty($wk_wow_child_button_slug)) { ?>
-                    <a id="topbar-button-right" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn btn-success btn-radius d-xl-block d-none"><?php echo esc_html($wk_wow_child_button); ?></a>
+                    <a id="topbar-button-right" href="<?php echo esc_url($wk_wow_child_button_slug_link); ?>" class="btn topbar-button btn-radius d-xl-block d-none"><?php echo esc_html($wk_wow_child_button); ?></a>
                 <?php } ?>
 
             </nav>

@@ -339,9 +339,47 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'label'    => esc_html__( 'Topbar Button Slug and Id:', 'wk-wow-child' ),
             		'description' => __('1. #id (homepage); 2. slug; 3. slug#id..', 'wk-wow-child'),
                         'section'  => 'site_name_text_color',
-                'settings' => 'topbar_button_slug_setting',
+                        'settings' => 'topbar_button_slug_setting',
                         'priority' => 30,
                 )
+        );
+
+        $wp_customize->add_setting(
+                'topbar_button_text_color_setting',
+                array(
+                        'default'     => '#fff',
+                        'sanitize_callback' => 'sanitize_hex_color',
+                    )
+        );
+        $wp_customize->add_control(
+                new WP_Customize_Color_Control(
+                    $wp_customize,
+                    'topbar_button_text_color',
+                    array(
+                        'label'      => __( 'Topbar Button Text Color', 'wk-wow' ),
+                        'section'    => 'site_name_text_color',
+                        'settings'   => 'topbar_button_text_color_setting',
+                        'priority' => 30,
+                    ) )
+        );
+
+        $wp_customize->add_setting(
+                'topbar_button_bg_color_setting',
+                array(
+                        'default'     => '#000',
+                        'sanitize_callback' => 'sanitize_hex_color',
+                    )
+        );
+        $wp_customize->add_control(
+                new WP_Customize_Color_Control(
+                    $wp_customize,
+                    'topbar_button_bg_color',
+                    array(
+                        'label'      => __( 'Topbar Button Background Color', 'wk-wow' ),
+                        'section'    => 'site_name_text_color',
+                        'settings'   => 'topbar_button_bg_color_setting',
+                        'priority' => 30,
+                    ) )
         );
 
         /*Site owner*/
@@ -1299,8 +1337,12 @@ if (!function_exists('wkwc_customizer_css')) {
     #page-sub-header {
         background-color: <?php echo esc_html(get_theme_mod('header_bg_color_setting')); ?>;
     }
-    <?php }
-     $main_color = get_theme_mod('main_color'); ?>
+    <?php } ?>
+    .topbar-button {
+        background-color: <?php echo esc_html(get_theme_mod('topbar_button_bg_color_setting', '#000')); ?>;
+        color: <?php echo esc_html(get_theme_mod('topbar_button_text_color_setting', '#fff')); ?>;
+    }
+    <?php $main_color = get_theme_mod('main_color'); ?>
     .navbar-main-color,
     #footer-widget .widget-title:after,
     #wp-calendar #today,
