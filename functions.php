@@ -27,8 +27,8 @@ if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
     }
     if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
         wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
+        wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
     }
-    wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
 
     // force child theme style.css after bootstrap reload
     wp_dequeue_style('wk-wow-style');
