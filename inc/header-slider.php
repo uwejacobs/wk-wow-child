@@ -6,13 +6,13 @@ $img_sizes = [];
 $img_alt = [];
 ?>
 <div class="d-none"><?php
-foreach($headers as $header) {
-    $img_id = attachment_url_to_postid( $header["url"] );
+foreach ($headers as $header) {
+    $img_id = attachment_url_to_postid($header["url"]);
     $img_src[] = "'" . $header["url"] . "'";
-    $img_srcset[] = "'" . wp_get_attachment_image_srcset( $img_id ) . "'";
-    $img_sizes[] = "'" . wp_get_attachment_image_sizes( $img_id ) . "'";
+    $img_srcset[] = "'" . wp_get_attachment_image_srcset($img_id) . "'";
+    $img_sizes[] = "'" . wp_get_attachment_image_sizes($img_id) . "'";
     $img_alt[] = "'" . get_post_meta($img_id, '_wp_attachment_image_alt', true) . "'";
-    echo wkwc_create_responsive_image( $header["url"] );
+    echo wkwc_create_responsive_image($header["url"]);
 }
 ?>
 </div>

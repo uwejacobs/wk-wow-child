@@ -91,7 +91,9 @@
   padding: 0;
   padding-bottom: 56.25%;
   <?php $video_opacity = floatval(get_theme_mod('cover_yt_video_opacity_setting'));
-        if ($video_opacity < 0.1 || $video_opacity > 1.0) $video_opacity = 0.5; ?>
+    if ($video_opacity < 0.1 || $video_opacity > 1.0) {
+        $video_opacity = 0.5;
+    } ?>
   opacity: <?php echo $video_opacity; ?>;
 }
 

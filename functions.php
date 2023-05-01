@@ -1,17 +1,21 @@
 <?php
 // Exit if accessed directly
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-require_once dirname( __FILE__ ) . '/inc/wp_bootstrap_navwalker.php';
-require_once dirname( __FILE__ ) . '/inc/custom-header.php';
-require_once dirname( __FILE__ ) . '/inc/shortcodes.php';
+require_once dirname(__FILE__) . '/inc/wp_bootstrap_navwalker.php';
+require_once dirname(__FILE__) . '/inc/custom-header.php';
+require_once dirname(__FILE__) . '/inc/shortcodes.php';
 
 register_nav_menu('mainNav', 'Main menu');
 
 if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
-    function wkwc_chld_thm_cfg_locale_css($uri){
-        if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css'))
+    function wkwc_chld_thm_cfg_locale_css($uri)
+    {
+        if (empty($uri) && is_rtl() && file_exists(get_template_directory() . '/rtl.css')) {
             $uri = get_template_directory_uri() . '/rtl.css';
+        }
         return $uri;
     }
 
@@ -19,46 +23,48 @@ if (!function_exists('wkwc_chld_thm_cfg_locale_css')) {
 }
 
 if (!function_exists('wkwc_chld_thm_cfg_css_js')) {
-    function wkwc_chld_thm_cfg_css_js() {
-    if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
-        wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css');
-    } else if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
-        wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
-    }
-    if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
-        wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
-        wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
-    }
+    function wkwc_chld_thm_cfg_css_js()
+    {
+        if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
+            wp_enqueue_style('wk-wow-child-'.get_theme_mod('theme_option_setting'), get_stylesheet_directory_uri() . '/inc/assets/css/presets/theme-option/'.get_theme_mod('theme_option_setting').'.css');
+        } elseif (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
+            wp_enqueue_style('wk-wow-bootstrap-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap.min.css');
+        }
+        if (get_theme_mod('load_bootstrap_setting', 'yes') == 'yes') {
+            wp_enqueue_script('wk-wow-bootstrapjs-child', get_stylesheet_directory_uri(). '/inc/assets/js/bootstrap.bundle.min.js');
+            wp_enqueue_style('wk-wow-bootstrap-icons-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/bootstrap-icons.css');
+        }
 
     // force child theme style.css after bootstrap reload
-    wp_dequeue_style('wk-wow-style');
-    wp_deregister_style('wk-wow-style');
-    wp_dequeue_style('wk-wow-child-style');
-    wp_deregister_style('wk-wow-child-style');
-    wp_enqueue_style( 'wk-wow-child-style', get_stylesheet_uri() );
+        wp_dequeue_style('wk-wow-style');
+        wp_deregister_style('wk-wow-style');
+        wp_dequeue_style('wk-wow-child-style');
+        wp_deregister_style('wk-wow-child-style');
+        wp_enqueue_style('wk-wow-child-style', get_stylesheet_uri());
 
-    if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-        wp_enqueue_style('wk-wow-child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
-    }
+        if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+            wp_enqueue_style('wk-wow-child-woocommerce', get_stylesheet_directory_uri(). '/woocommerce.css');
+        }
 
-    wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
-    wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
-    wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child"), '', true);
-    wp_add_inline_script('wk-wow-themejs-child', 'const WKWC_options = ' . json_encode(array(
+        wp_enqueue_style('wk-wow-animate-css-child', get_stylesheet_directory_uri(). '/inc/assets/css/animate.css', array(), null, "(prefers-reduced-motion: no-preference)");
+        wp_enqueue_script('wk-wow-animate-visible-child', get_stylesheet_directory_uri() . '/inc/assets/js/jquery.animateVisible.js', array("jquery"), '', true);
+        wp_enqueue_script('wk-wow-themejs-child', get_stylesheet_directory_uri() . '/inc/assets/js/theme-script.js', array("jquery","wk-wow-animate-visible-child"), '', true);
+        wp_add_inline_script('wk-wow-themejs-child', 'const WKWC_options = ' . json_encode(array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'coverImageAni' => get_theme_mod('cover_image_ani', 'none'),
         'headerAni' => get_theme_mod('header_ani', 'none'),
         'buttonAni' => get_theme_mod('button_ani', 'none'),
         'featureAni' => get_theme_mod('feature_ani', 'none'),
         'photoSellerGalleryAni' => get_theme_mod('photo_seller_gallery_ani', 'none'),
-    )), 'before' );
+        )), 'before');
     }
 
     add_action('wp_enqueue_scripts', 'wkwc_chld_thm_cfg_css_js', 12);
 }
 
 if (!function_exists('wkwc_chld_thm_dequeue_parent_css')) {
-    function wkwc_chld_thm_dequeue_parent_css(){
+    function wkwc_chld_thm_dequeue_parent_css()
+    {
         if (get_theme_mod('load_fontawesome_setting', 'no') === 'no') {
             wp_dequeue_style('wk-wow-fontawesome-cdn');
             wp_deregister_style('wk-wow-fontawesome-cdn');
@@ -68,8 +74,8 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_css')) {
         wp_deregister_style('wk-wow-bootstrap-css');
         remove_action('wp_head', 'wk_wow_customizer_css');
         if (get_theme_mod('theme_option_setting', 'default') !== 'default') {
-            wp_dequeue_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
-            wp_deregister_style('wk-wow-'.get_theme_mod( 'theme_option_setting' ));
+            wp_dequeue_style('wk-wow-'.get_theme_mod('theme_option_setting'));
+            wp_deregister_style('wk-wow-'.get_theme_mod('theme_option_setting'));
         }
     }
 
@@ -77,40 +83,45 @@ if (!function_exists('wkwc_chld_thm_dequeue_parent_css')) {
 }
 
 if (!function_exists('wkwc_chld_thm_dequeue_parent_js')) {
-    function wkwc_chld_thm_dequeue_parent_js(){
+    function wkwc_chld_thm_dequeue_parent_js()
+    {
         wp_dequeue_script('wk-wow-popper');
         wp_deregister_script('wk-wow-popper');
         wp_dequeue_script('wk-wow-bootstrapjs');
         wp_deregister_script('wk-wow-bootstrapjs');
-                wp_deregister_script( 'wk-wow-jarallax-js'); 
-                wp_dequeue_script( 'wk-wow-jarallax-js'); 
+                wp_deregister_script('wk-wow-jarallax-js');
+                wp_dequeue_script('wk-wow-jarallax-js');
     }
 
     add_action('wp_print_scripts', 'wkwc_chld_thm_dequeue_parent_js', 11);
 }
 
 if (!function_exists('wk_wow_child_password_form')) {
-    remove_filter( 'the_password_form', 'wk_wow_password_form' );
-    function wk_wow_child_password_form() {
+    remove_filter('the_password_form', 'wk_wow_password_form');
+    function wk_wow_child_password_form()
+    {
         global $post;
-        $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
-        $o = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post">
-        <div class="d-block mb-3">' . __( "To view this protected post, enter the password below:", 'wk-wow-child' ) . '</div>
-        <div class="input-group"><input name="post_password" id="' . $label . '" type="password" size="20" maxlength="20" class="form-control me-2" /> <input type="submit" name="Submit" value="' . esc_attr__( "Submit", 'wk-wow-child' ) . '" class="input-group-text btn btn-primary" /></div>
+        $label = 'pwbox-'.( empty($post->ID) ? rand() : $post->ID );
+        $o = '<form action="' . esc_url(site_url('wp-login.php?action=postpass', 'login_post')) . '" method="post">
+        <div class="d-block mb-3">' . __("To view this protected post, enter the password below:", 'wk-wow-child') . '</div>
+        <div class="input-group"><input name="post_password" id="' . $label . '" type="password" size="20" maxlength="20" class="form-control me-2" /> <input type="submit" name="Submit" value="' . esc_attr__("Submit", 'wk-wow-child') . '" class="input-group-text btn btn-primary" /></div>
         </form>';
         return $o;
     }
-    add_filter( 'the_password_form', 'wk_wow_child_password_form', 11 );
+    add_filter('the_password_form', 'wk_wow_child_password_form', 11);
 }
 
 if (!function_exists('wkwc_customize_register_child')) {
-    function wkwc_customize_register_child($wp_customize) {
-        if (class_exists("WP_Customize_Control") && !class_exists("ThemeName_Customize_Misc_Control")):
-            class ThemeName_Customize_Misc_Control extends WP_Customize_Control {
+    function wkwc_customize_register_child($wp_customize)
+    {
+        if (class_exists("WP_Customize_Control") && !class_exists("ThemeName_Customize_Misc_Control")) :
+            class ThemeName_Customize_Misc_Control extends WP_Customize_Control
+            {
                 public $settings = "blogname";
                 public $description = "";
 
-                public function render_content() {
+                public function render_content()
+                {
                     switch ($this->type) {
                         default:
                         case "text":
@@ -136,7 +147,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'title' => __('API', 'wk-wow-child'),
                 'priority' => 70,
                 'capability' => 'edit_theme_options',
-        ));
+            )
+        );
         $wp_customize->add_setting('recaptcha_site_key_v2_setting', array(
             'default'   => '',
             'type'       => 'theme_mod',
@@ -265,7 +277,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'no' => __('No', 'wk-wow-child'),
                     ),
             'priority' => 20,
-        ));
+            )
+        );
 
         /*FontAwesome*/
         $wp_customize->add_setting('load_fontawesome_setting', array(
@@ -285,7 +298,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'no' => __('No', 'wk-wow-child'),
                     ),
             'priority' => 20,
-        ));
+            )
+        );
 
         /*Copyright Text*/
         $wp_customize->add_setting('copyright_text_setting', array(
@@ -305,18 +319,18 @@ if (!function_exists('wkwc_customize_register_child')) {
 
         // Topbar Button Text
         $wp_customize->add_setting(
-                'topbar_button_text_setting',
-                array(
-                        'default'           => esc_html__( 'Contact Us', 'wk-wow-child' ),
+            'topbar_button_text_setting',
+            array(
+                        'default'           => esc_html__('Contact Us', 'wk-wow-child'),
                         'capability'        => 'edit_theme_options',
                         'sanitize_callback' => 'sanitize_text_field',
                 )
         );
         $wp_customize->add_control(
-                'topbar_button_text',
-                array(
+            'topbar_button_text',
+            array(
                         'type'     => 'text',
-                        'label'    => esc_html__( 'Topbar Button Text:', 'wk-wow-child' ),
+                        'label'    => esc_html__('Topbar Button Text:', 'wk-wow-child'),
                         'section'  => 'site_name_text_color',
                         'settings' => 'topbar_button_text_setting',
                         'priority' => 30,
@@ -325,19 +339,19 @@ if (!function_exists('wkwc_customize_register_child')) {
 
         // Topbar Button Slug
         $wp_customize->add_setting(
-                'topbar_button_slug_setting',
-                array(
-                        'default'           => esc_html__( 'contact-us', 'wk-wow-child' ),
+            'topbar_button_slug_setting',
+            array(
+                        'default'           => esc_html__('contact-us', 'wk-wow-child'),
                         'capability'        => 'edit_theme_options',
                         'sanitize_callback' => 'wp_filter_nohtml_kses',
                 )
         );
         $wp_customize->add_control(
-                'topbar_button_slug',
-                array(
+            'topbar_button_slug',
+            array(
                         'type'     => 'text',
-                        'label'    => esc_html__( 'Topbar Button Slug and Id:', 'wk-wow-child' ),
-            		'description' => __('1. #id (homepage); 2. slug; 3. slug#id..', 'wk-wow-child'),
+                        'label'    => esc_html__('Topbar Button Slug and Id:', 'wk-wow-child'),
+                    'description' => __('1. #id (homepage); 2. slug; 3. slug#id..', 'wk-wow-child'),
                         'section'  => 'site_name_text_color',
                         'settings' => 'topbar_button_slug_setting',
                         'priority' => 30,
@@ -345,41 +359,43 @@ if (!function_exists('wkwc_customize_register_child')) {
         );
 
         $wp_customize->add_setting(
-                'topbar_button_text_color_setting',
-                array(
+            'topbar_button_text_color_setting',
+            array(
                         'default'     => '#fff',
                         'sanitize_callback' => 'sanitize_hex_color',
                     )
         );
         $wp_customize->add_control(
-                new WP_Customize_Color_Control(
-                    $wp_customize,
-                    'topbar_button_text_color',
-                    array(
-                        'label'      => __( 'Topbar Button Text Color', 'wk-wow' ),
+            new WP_Customize_Color_Control(
+                $wp_customize,
+                'topbar_button_text_color',
+                array(
+                        'label'      => __('Topbar Button Text Color', 'wk-wow'),
                         'section'    => 'site_name_text_color',
                         'settings'   => 'topbar_button_text_color_setting',
                         'priority' => 30,
-                    ) )
+                )
+            )
         );
 
         $wp_customize->add_setting(
-                'topbar_button_bg_color_setting',
-                array(
+            'topbar_button_bg_color_setting',
+            array(
                         'default'     => '#000',
                         'sanitize_callback' => 'sanitize_hex_color',
                     )
         );
         $wp_customize->add_control(
-                new WP_Customize_Color_Control(
-                    $wp_customize,
-                    'topbar_button_bg_color',
-                    array(
-                        'label'      => __( 'Topbar Button Background Color', 'wk-wow' ),
+            new WP_Customize_Color_Control(
+                $wp_customize,
+                'topbar_button_bg_color',
+                array(
+                        'label'      => __('Topbar Button Background Color', 'wk-wow'),
                         'section'    => 'site_name_text_color',
                         'settings'   => 'topbar_button_bg_color_setting',
                         'priority' => 30,
-                    ) )
+                )
+            )
         );
 
         /*Site owner*/
@@ -389,7 +405,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'title' => __('Site Owner Info', 'wk-wow-child'),
                 'priority' => 15,
                 'capability' => 'edit_theme_options',
-        ));
+            )
+        );
 
         $wp_customize->add_setting('site_owner_company_setting', array(
             'default'   => '',
@@ -634,7 +651,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'title' => __('Social accounts', 'wk-wow-child'),
                 'priority' => 20,
                 'capability' => 'edit_theme_options',
-        ));
+            )
+        );
 
         $wp_customize->add_setting('social_google_my_business_setting', array(
             'default'   => '',
@@ -834,14 +852,14 @@ if (!function_exists('wkwc_customize_register_child')) {
 
 
         //Theme Option
-        $wp_customize->add_setting( 'theme_option_setting', array(
+        $wp_customize->add_setting('theme_option_setting', array(
             'default'   => 'default',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'theme_option', array(
-            'label' => __( 'Theme Option', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'theme_option', array(
+            'label' => __('Theme Option', 'wk-wow-child'),
             'description' => __('Check all settings in the Colors section.', 'wk-wow-child'),
             'section'    => 'typography',
             'settings'   => 'theme_option_setting',
@@ -878,7 +896,7 @@ if (!function_exists('wkwc_customize_register_child')) {
             'yeti' => 'Yeti',
             'zephyr' => 'Zephyr',
             )
-        ) ) );
+        )));
 
         /*Animations*/
         $wp_customize->add_section(
@@ -887,7 +905,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'title' => __('Animations', 'wk-wow-child'),
                 'priority' => 35,
                 'capability' => 'edit_theme_options',
-        ));
+            )
+        );
 
         $wkwc_animations = array(
             'none' =>'No animations',
@@ -908,7 +927,7 @@ if (!function_exists('wkwc_customize_register_child')) {
             'scale-in-ver-center'  => 'Scale in vertical center',
             'scale-up-center'      => 'Scale up center',
             'scale-up-hor-center'  => 'Scale up horizontal center',
-            'scale-up-ver-center'  => 'Scale up vertical center', 
+            'scale-up-ver-center'  => 'Scale up vertical center',
             'shake-horizontal'     => 'Shake horizontal',
             'shake-vertical'       => 'Shake vertical',
             'slide-bck-center'     => 'Slide back center',
@@ -924,50 +943,50 @@ if (!function_exists('wkwc_customize_register_child')) {
             'tracking-in-contract' => 'Tracking in contract',
             'tracking-in-expand'   => 'Tracking in expand',
         );
-        $wp_customize->add_setting( 'cover_image_ani', array(
+        $wp_customize->add_setting('cover_image_ani', array(
             'default'   => 'kenburns-top',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'cover_image_ani', array(
-            'label' => __( 'Cover image', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_image_ani', array(
+            'label' => __('Cover image', 'wk-wow-child'),
             'description' => __('The Ken Burns animations work best.', 'wk-wow-child'),
             'section'    => 'animations',
             'settings'   => 'cover_image_ani',
             'type'    => 'select',
             'choices' => $wkwc_animations
-        ) ) );
+        )));
 
-        $wp_customize->add_setting( 'header_ani', array(
+        $wp_customize->add_setting('header_ani', array(
             'default'   => 'tracking-in-expand',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'header_ani', array(
-            'label' => __( 'Header (h1-h6)', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'header_ani', array(
+            'label' => __('Header (h1-h6)', 'wk-wow-child'),
             'description' => __('The Tracking and Focus animations work best.', 'wk-wow-child'),
             'section'    => 'animations',
             'settings'   => 'header_ani',
             'type'    => 'select',
             'choices' => $wkwc_animations
-        ) ) );
+        )));
 
-        $wp_customize->add_setting( 'feature_ani', array(
+        $wp_customize->add_setting('feature_ani', array(
             'default'   => 'fade-in-bottom',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'feature_ani', array(
-            'label' => __( 'Feature', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'feature_ani', array(
+            'label' => __('Feature', 'wk-wow-child'),
             'description' => __('The Fade-In animations work best.', 'wk-wow-child'),
             'section'    => 'animations',
             'settings'   => 'feature_ani',
             'type'    => 'select',
             'choices' => $wkwc_animations
-        ) ) );
+        )));
 
         $wp_customize->add_setting('feature_hover_scale', array(
             'default' => 'no',
@@ -985,46 +1004,47 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'yes' => __('Yes', 'wk-wow-child'),
                         'no' => __('No', 'wk-wow-child'),
                     ),
-        ));
+            )
+        );
 
-        $wp_customize->add_setting( 'button_ani', array(
+        $wp_customize->add_setting('button_ani', array(
             'default'   => 'shake-horizontal',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'button_ani', array(
-            'label' => __( 'Button Hover', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'button_ani', array(
+            'label' => __('Button Hover', 'wk-wow-child'),
             'description' => __('The Shake animations work best.', 'wk-wow-child'),
             'section'    => 'animations',
             'settings'   => 'button_ani',
             'type'    => 'select',
             'choices' => $wkwc_animations
-        ) ) );
+        )));
 
-        $wp_customize->add_setting( 'photo_seller_gallery_ani', array(
+        $wp_customize->add_setting('photo_seller_gallery_ani', array(
             'default'   => 'slit-in-vertical',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'photo_seller_gallery_ani', array(
-            'label' => __( 'WP Photo Seller Gallery Image', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'photo_seller_gallery_ani', array(
+            'label' => __('WP Photo Seller Gallery Image', 'wk-wow-child'),
             'description' => __('The Flip, Scale, Slide, Slit and Swing animations work best.', 'wk-wow-child'),
             'section'    => 'animations',
             'settings'   => 'photo_seller_gallery_ani',
             'type'    => 'select',
             'choices' => $wkwc_animations
-        ) ) );
+        )));
 
-        $wp_customize->add_setting( 'navbar_color_setting', array(
+        $wp_customize->add_setting('navbar_color_setting', array(
             'default'   => 'light',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'navbar_color', array(
-            'label' => __( 'Navigation Bar / Copyright Footer Background Color', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'navbar_color', array(
+            'label' => __('Navigation Bar / Copyright Footer Background Color', 'wk-wow-child'),
             'description' => __('Set to Primary in case the Main Color is the same as the Primary Color.', 'wk-wow-child'),
             'section'    => 'main_color_section',
             'settings'   => 'navbar_color_setting',
@@ -1042,7 +1062,7 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'warning' => 'Warning',
                         'danger' => 'Danger')
 
-        ) ) );
+        )));
 
         /* Header Banner */
         $wp_customize->add_control(
@@ -1083,14 +1103,14 @@ if (!function_exists('wkwc_customize_register_child')) {
             )
         );
         
-        $wp_customize->add_setting( 'cover_image_setting', array(
+        $wp_customize->add_setting('cover_image_setting', array(
             'default'   => 'image',
             'type'       => 'theme_mod',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'wp_filter_nohtml_kses',
-        ) );
-        $wp_customize->add_control( new WP_Customize_Control($wp_customize, 'cover_image', array(
-            'label' => __( 'Banner Style', 'wk-wow-child' ),
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'cover_image', array(
+            'label' => __('Banner Style', 'wk-wow-child'),
             'section'    => 'header_image',
             'settings'   => 'cover_image_setting',
             'type'    => 'select',
@@ -1100,7 +1120,7 @@ if (!function_exists('wkwc_customize_register_child')) {
                         'slider' => 'Full-screen slider with all uploaded images',
                         'centered-slider' => 'Centered slider with all uploaded images'),
             'priority' => 23,
-        ) ) );
+        )));
 
         $wp_customize->add_control(
             new ThemeName_Customize_Misc_Control(
@@ -1141,8 +1161,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_fade',
-                array(
+            'cover_slider_fade',
+            array(
                         'label' => __('Transition between images', 'wk-wow-child'),
                         'section' => 'header_image',
                         'settings' => 'cover_slider_fade_setting',
@@ -1152,15 +1172,16 @@ if (!function_exists('wkwc_customize_register_child')) {
                                         'slide' => __('Slide', 'wk-wow-child'),
                                 ),
                 'priority' => 32,
-        ));
+            )
+        );
 
         $wp_customize->add_setting('cover_slider_caption_setting', array(
                 'default' => 'no',
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_caption',
-                array(
+            'cover_slider_caption',
+            array(
                         'label' => __('Show image captions', 'wk-wow-child'),
                         'section' => 'header_image',
                         'settings' => 'cover_slider_caption_setting',
@@ -1170,15 +1191,16 @@ if (!function_exists('wkwc_customize_register_child')) {
                                         'yes' => __('Yes', 'wk-wow-child'),
                                 ),
                 'priority' => 33,
-        ));
+            )
+        );
 
         $wp_customize->add_setting('cover_slider_control_setting', array(
                 'default' => 'yes',
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_control',
-                array(
+            'cover_slider_control',
+            array(
                         'label' => __('Show slider controls', 'wk-wow-child'),
                         'section' => 'header_image',
                         'settings' => 'cover_slider_control_setting',
@@ -1188,15 +1210,16 @@ if (!function_exists('wkwc_customize_register_child')) {
                                         'yes' => __('Yes', 'wk-wow-child'),
                                 ),
                 'priority' => 34,
-        ));
+            )
+        );
 
         $wp_customize->add_setting('cover_slider_indicator_setting', array(
                 'default' => 'yes',
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_indicator',
-                array(
+            'cover_slider_indicator',
+            array(
                         'label' => __('Show slider indicators', 'wk-wow-child'),
                         'section' => 'header_image',
                         'settings' => 'cover_slider_indicator_setting',
@@ -1206,15 +1229,16 @@ if (!function_exists('wkwc_customize_register_child')) {
                                         'yes' => __('Yes', 'wk-wow-child'),
                                 ),
                 'priority' => 35,
-        ));
+            )
+        );
 
         $wp_customize->add_setting('cover_slider_dark_setting', array(
                 'default' => 'yes',
                 'sanitize_callback' => 'sanitize_text_field',
         ));
         $wp_customize->add_control(
-                'cover_slider_dark',
-                array(
+            'cover_slider_dark',
+            array(
                         'label' => __('Show dark slider controls and indicators', 'wk-wow-child'),
                         'description' => __('Set this to Yes if your theme setting has a light background color.', 'wk-wow-child'),
                         'section' => 'header_image',
@@ -1225,7 +1249,8 @@ if (!function_exists('wkwc_customize_register_child')) {
                                         'yes' => __('Yes', 'wk-wow-child'),
                                 ),
                 'priority' => 36,
-        ));
+            )
+        );
 
         $wp_customize->add_setting('cover_yt_video_setting', array(
             'default'   => '',
@@ -1277,46 +1302,47 @@ if (!function_exists('wkwc_customize_register_child')) {
 }
 
 if (!function_exists('wk_wow_child_widgets_init')) {
-    function wk_wow_child_widgets_init() {
-        register_sidebar( array(
-            'name'          => esc_html__( 'Footer 4', 'wk-wow-child' ),
+    function wk_wow_child_widgets_init()
+    {
+        register_sidebar(array(
+            'name'          => esc_html__('Footer 4', 'wk-wow-child'),
             'id'            => 'footer-4',
-            'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
+            'description'   => esc_html__('Add widgets here.', 'wk-wow-child'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
-        ) );
+        ));
 
-        register_sidebar( array(
-            'name'          => esc_html__( 'Footer 5', 'wk-wow-child' ),
+        register_sidebar(array(
+            'name'          => esc_html__('Footer 5', 'wk-wow-child'),
             'id'            => 'footer-5',
-            'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
+            'description'   => esc_html__('Add widgets here.', 'wk-wow-child'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
-        ) );
+        ));
 
-        register_sidebar( array(
-            'name'          => esc_html__( 'Footer 6', 'wk-wow-child' ),
+        register_sidebar(array(
+            'name'          => esc_html__('Footer 6', 'wk-wow-child'),
             'id'            => 'footer-6',
-            'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
+            'description'   => esc_html__('Add widgets here.', 'wk-wow-child'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
-        ) );
+        ));
 
-        register_sidebar( array(
-            'name'          => esc_html__( 'Footer 7', 'wk-wow-child' ),
+        register_sidebar(array(
+            'name'          => esc_html__('Footer 7', 'wk-wow-child'),
             'id'            => 'footer-7',
-            'description'   => esc_html__( 'Add widgets here.', 'wk-wow-child' ),
+            'description'   => esc_html__('Add widgets here.', 'wk-wow-child'),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
-        ) );
+        ));
     }
 
     add_action('widgets_init', 'wk_wow_child_widgets_init');
@@ -1328,21 +1354,21 @@ if (!function_exists('wkwc_customizer_css')) {
     {
         ?>
     <style id="wk_wow_child_customizer_css" type="text/css">
-    <?php if (get_theme_mod('navbar_color_setting') === "transparent") { ?>
+        <?php if (get_theme_mod('navbar_color_setting') === "transparent") { ?>
     .navbar-transparent {
         opacity: 0.75;
     }
-    <?php } ?>
-    <?php if (!empty(get_theme_mod('header_bg_color_setting'))) { ?>
+        <?php } ?>
+        <?php if (!empty(get_theme_mod('header_bg_color_setting'))) { ?>
     #page-sub-header {
         background-color: <?php echo esc_html(get_theme_mod('header_bg_color_setting')); ?>;
     }
-    <?php } ?>
+        <?php } ?>
     .topbar-button {
         background-color: <?php echo esc_html(get_theme_mod('topbar_button_bg_color_setting', '#000')); ?>;
         color: <?php echo esc_html(get_theme_mod('topbar_button_text_color_setting', '#fff')); ?>;
     }
-    <?php $main_color = get_theme_mod('main_color'); ?>
+        <?php $main_color = get_theme_mod('main_color'); ?>
     .navbar-main-color,
     #footer-widget .widget-title:after,
     #wp-calendar #today,
@@ -1403,7 +1429,7 @@ if (!function_exists('wkwc_customizer_css')) {
        border-top-color: <?php echo esc_html($main_color);?>;
     }
     
-    <?php if (get_theme_mod('feature_hover_scale') === "yes") { ?>
+        <?php if (get_theme_mod('feature_hover_scale') === "yes") { ?>
     .single-feature:hover, .contact .listing-item:hover {
       -webkit-transform: scale(1.05) !important;
       transform: scale(1.05) !important;
@@ -1414,7 +1440,7 @@ if (!function_exists('wkwc_customizer_css')) {
           transform: none !important;
         }
     }
-    <?php } ?>
+        <?php } ?>
 
     h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, display-5, display-6,
     a, a:hover, a:focus, a:active,
@@ -1431,12 +1457,12 @@ if (!function_exists('wkwc_customizer_css')) {
       color: <?php echo esc_html($main_color) ?>;
     }
 
-    <?php
-        require_once dirname( __FILE__ ) . '/inc/color-css.php';
+        <?php
+        require_once dirname(__FILE__) . '/inc/color-css.php';
         echo wkwc_generateColorCSS(get_theme_mod('main_color'), "main");
         $isDark = wkwc_isDark(wkwc_hex2rgb($main_color));
         $text_color = $isDark ? '#212529' : '#fff';
-    ?>
+        ?>
 
     #page-banner-title,
     .nk-awb p,
@@ -1449,118 +1475,130 @@ if (!function_exists('wkwc_customizer_css')) {
       color: <?php echo esc_html($text_color) ?>;
     }
     </style>
-    <?php
+        <?php
     }
 
-    add_action( 'wp_head', 'wkwc_customizer_css', 11);
+    add_action('wp_head', 'wkwc_customizer_css', 11);
 }
 
 if (!function_exists('wkwc_sanitize_meta_tag')) {
-    function wkwc_sanitize_meta_tag($s) {
+    function wkwc_sanitize_meta_tag($s)
+    {
         return wp_kses($s, array('meta'=>array('name'=>array(),'content'=>array())));
     }
 }
 
 if (!function_exists('wk_wow_child_bg_class')) {
-    function wk_wow_child_bg_class() {
+    function wk_wow_child_bg_class()
+    {
         $color = get_theme_mod('navbar_color_setting');
         $color = $color ?? 'light';
         $main_color = get_theme_mod('main_color');
-        switch($color) {
-        case 'main':
-            if ($main_color) {
-                return 'navbar-dark navbar-main-color';
-            } else {
-                return 'navbar-light bg-light';
-            }
+        switch ($color) {
+            case 'main':
+                if ($main_color) {
+                    return 'navbar-dark navbar-main-color';
+                } else {
+                    return 'navbar-light bg-light';
+                }
+                break;
+            case 'none':
+                return 'navbar-light no-background';
             break;
-        case 'none':
-            return 'navbar-light no-background';
+            case 'transparent':
+                return 'navbar-light bg-light navbar-transparent transparent-background';
             break;
-        case 'transparent':
-            return 'navbar-light bg-light navbar-transparent transparent-background';
+            case 'light':
+                return 'navbar-light bg-' . $color;
             break;
-        case 'light':
-            return 'navbar-light bg-' . $color;
-            break;
-        default:
-            return 'navbar-dark bg-' . $color;
+            default:
+                return 'navbar-dark bg-' . $color;
             break;
         }
     }
 }
 
 if (!function_exists('wk_wow_child_body_classes')) {
-    function wk_wow_child_body_classes( $classes ) {
+    function wk_wow_child_body_classes($classes)
+    {
         $classes[] = 'navbar-color-' . get_theme_mod('navbar_color_setting', 'light');
 
         $color = get_theme_mod('main_color');
-            if ($color && $color !== '#ca4e07' ) {
-                $classes[] = 'main-color';
-            }
-
-        $color = get_theme_mod('header_bg_color_setting');
-            if ($color && $color !== '#000' && $color !== '#000000') {
-                $classes[] = 'header-bg-color';
-            }
-
-        $color = get_header_textcolor();
-            if ($color && $color !== '000' && $color !== '000000') {
-                $classes[] = 'header-text-color';
-            }
-
-        $color = get_background_color();
-            if ($color && $color !== 'fff' && $color !== 'ffffff') {
-                $classes[] = 'body-background-color';
+        if ($color && $color !== '#ca4e07') {
+            $classes[] = 'main-color';
         }
 
         $color = get_theme_mod('header_bg_color_setting');
-            if ($color && $color !== '#000' && $color !== '#000000') {
-                $classes[] = 'header-background-color';
-	    }
+        if ($color && $color !== '#000' && $color !== '#000000') {
+            $classes[] = 'header-bg-color';
+        }
 
-	if (!is_front_page() && has_post_thumbnail(get_the_ID())) {
+        $color = get_header_textcolor();
+        if ($color && $color !== '000' && $color !== '000000') {
+            $classes[] = 'header-text-color';
+        }
+
+        $color = get_background_color();
+        if ($color && $color !== 'fff' && $color !== 'ffffff') {
+            $classes[] = 'body-background-color';
+        }
+
+        $color = get_theme_mod('header_bg_color_setting');
+        if ($color && $color !== '#000' && $color !== '#000000') {
+            $classes[] = 'header-background-color';
+        }
+
+        if (!is_front_page() && has_post_thumbnail(get_the_ID())) {
                 $classes[] = 'has-page-banner';
-	} else {
+        } else {
                 $classes[] = 'no-page-banner';
-	}
+        }
 
-	if (!is_front_page() && function_exists('yoast_breadcrumb') && !empty(yoast_breadcrumb('', '', false))) {
+        if (!is_front_page() && function_exists('yoast_breadcrumb') && !empty(yoast_breadcrumb('', '', false))) {
                 $classes[] = 'has-breadcrumbs';
-	}
+        }
 
             return $classes;
     }
 
-    add_filter( 'body_class', 'wk_wow_child_body_classes' );
+    add_filter('body_class', 'wk_wow_child_body_classes');
 }
 
 if (!function_exists('wkwc_create_responsive_image')) {
-    function wkwc_create_responsive_image( $img, $id = null, $class = null ) {
-        $img_id = attachment_url_to_postid( $img );
-        $img_srcset = wp_get_attachment_image_srcset( $img_id );
+    function wkwc_create_responsive_image($img, $id = null, $class = null)
+    {
+        $img_id = attachment_url_to_postid($img);
+        $img_srcset = wp_get_attachment_image_srcset($img_id);
         $img_sizes = wp_get_attachment_image_sizes($img_id, 'full');
         $img_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-        return '<img ' . ($id ? 'id="' . esc_attr( $id ) . '" ' : '') . ($class ? 'class="' . esc_attr( $class ) . '" ' : '') . 'src="' . $img . '" srcset="' . esc_attr( $img_srcset ) . '" sizes="' . esc_attr( $img_sizes ) . '" alt="' . esc_attr( $img_alt ) . '">';
+        return '<img ' . ($id ? 'id="' . esc_attr($id) . '" ' : '') . ($class ? 'class="' . esc_attr($class) . '" ' : '') . 'src="' . $img . '" srcset="' . esc_attr($img_srcset) . '" sizes="' . esc_attr($img_sizes) . '" alt="' . esc_attr($img_alt) . '">';
     }
 }
 
 if (!function_exists('wkwc_page_header_banner')) {
-    function wkwc_page_header_banner() {
-	    if (is_front_page())  return;
-	    if (!has_post_thumbnail(get_the_ID())) return;
-?>
+    function wkwc_page_header_banner()
+    {
+        if (is_front_page()) {
+            return;
+        }
+        if (!has_post_thumbnail(get_the_ID())) {
+            return;
+        }
+        ?>
 <div id="page-banner" style="background: url('<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>')">
     <h1 id="page-banner-title" aria-current="page"><?php the_title(); ?></h1>
 </div>
-<?php
+        <?php
     }
-    add_action( 'wkwc_page_header_banner', 'wkwc_page_header_banner', 1 );
+    add_action('wkwc_page_header_banner', 'wkwc_page_header_banner', 1);
 }
 
 if (!function_exists('wkwc_breadcrumbs')) {
-    function wkwc_breadcrumbs() {
-        if ( function_exists('yoast_breadcrumb') ) { yoast_breadcrumb( '<div class="col-12"><p id="breadcrumbs">','</p></div>' ); }
+    function wkwc_breadcrumbs()
+    {
+        if (function_exists('yoast_breadcrumb')) {
+            yoast_breadcrumb('<div class="col-12"><p id="breadcrumbs">', '</p></div>');
+        }
     }
-    add_action( 'wkwc_breadcrumbs', 'wkwc_breadcrumbs', 1 );
+    add_action('wkwc_breadcrumbs', 'wkwc_breadcrumbs', 1);
 }
